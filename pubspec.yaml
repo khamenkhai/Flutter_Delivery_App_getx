@@ -47,7 +47,7 @@ dependencies:
   firebase_auth: ^4.17.4
   firebase_core: ^2.23.0
   firebase_storage: ^11.5.2
-  cloud_firestore: ^4.15.5
+  cloud_firestore: ^4.13.2
   intl: ^0.18.1
   iconly: ^1.0.1
   lottie: ^3.0.0
@@ -55,8 +55,7 @@ dependencies:
   firebase_crashlytics: ^3.4.8
   dot_navigation_bar: ^1.0.2
   signature: ^5.4.1
-  fl_chart: ^0.66.2
-  # fl_chart: ^0.66.2
+
 
 dev_dependencies:
   flutter_test:

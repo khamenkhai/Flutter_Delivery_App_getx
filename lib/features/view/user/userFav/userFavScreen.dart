@@ -20,59 +20,58 @@ class _UserFavScreenState extends State<UserFavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Favourites"),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Obx(() => GridView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: authController.user?.favProducts?.length ?? 0,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                        childAspectRatio: 0.8),
-                    itemBuilder: (context, index) {
-                      String productId =
-                          authController.user!.favProducts![index];
-                      return StreamBuilder<ProductModel>(
-                          stream:
-                              userProductController.getProductById(productId),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return _ProductGridWidget(snapshot.data!);
-                            }
-                            return Center(child: CircularProgressIndicator());
-                          });
+      appBar: AppBar(
+        title: Text("Favourites"),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            ///display user fav products with grid view
+            Obx(
+              () => GridView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: authController.user?.favProducts?.length ?? 0,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 0.8),
+                itemBuilder: (context, index) {
+                  String productId = authController.user!.favProducts![index];
+                  return StreamBuilder<ProductModel>(
+                    stream: userProductController.getProductById(productId),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return _ProductGridWidget(snapshot.data!);
+                      }
+                      return Center(child: CircularProgressIndicator());
                     },
-                  ))
-            ],
-          ),
-        )
-        // body: Obx(() => Column(
-        //   children: [
-        //     Listvie
-        //   ],
-        // )),
-        );
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
+  ///fav product grid  widget
   GestureDetector _ProductGridWidget(ProductModel product) {
     return GestureDetector(
       onTap: () {
         navigateToProductDetail(product);
       },
       child: Container(
-        //padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -96,26 +95,32 @@ class _UserFavScreenState extends State<UserFavScreen> {
                       )
                     : Container(),
                 Container(
-                    padding: EdgeInsets.all(5),
-                    child: Obx(() => InkWell(
-                        onTap: () {
-                          userProductController.addProductToFav(
-                              productId: product.productId.toString());
-                        },
-                        child: authController.user!.favProducts!
-                                .contains(product.productId.toString())
-                            ? Icon(
-                                IconlyBold.heart,
-                                color: Colors.red,
-                              )
-                            : Icon(IconlyLight.heart))))
+                  padding: EdgeInsets.all(5),
+                  child: Obx(
+                    () => InkWell(
+                      onTap: () {
+                        userProductController.addProductToFav(
+                            productId: product.productId.toString());
+                      },
+                      child: authController.user!.favProducts!
+                              .contains(product.productId.toString())
+                          ? Icon(
+                              IconlyBold.heart,
+                              color: Colors.red,
+                            )
+                          : Icon(IconlyLight.heart),
+                    ),
+                  ),
+                )
               ],
             ),
             SizedBox(height: 7),
             Center(
-                child: Hero(
-                    tag: product.productId!,
-                    child: Image.network(product.productImage!, height: 75))),
+              child: Hero(
+                tag: product.productId!,
+                child: Image.network(product.productImage!, height: 75),
+              ),
+            ),
 
             ///product detail
             SizedBox(height: 10),
@@ -149,9 +154,15 @@ class _UserFavScreenState extends State<UserFavScreen> {
     );
   }
 
+
+
+  ///redirect to product detail page
   navigateToProductDetail(ProductModel product) {
     userProductController.getProductById(product.productId!);
-    navigatorPush(context, ProductDetailScreen(productId: product.productId!),
-        PageTransitionType.rightToLeft);
+    navigatorPush(
+      context,
+      ProductDetailScreen(productId: product.productId!),
+      PageTransitionType.rightToLeft,
+    );
   }
 }

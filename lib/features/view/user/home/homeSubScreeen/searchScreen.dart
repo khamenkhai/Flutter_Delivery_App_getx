@@ -64,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
 
-        //search results
+            //search result list
             Obx(() => SliverToBoxAdapter(
               child: userProductController.loading.value ? Container(
                 height: 500,
@@ -74,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   searchProducts.length == 0 && _isFirst == false ? Container(height: 500,child: Center(child: Text("Couldn't find that product!")))
                 :
                 ListView.builder(
-                  padding: EdgeInsets.only(left: 15,right: 15),
+                  padding: EdgeInsets.only(left: 5,right: 5),
                   shrinkWrap: true,
                   itemCount: searchProducts.length,
                   itemBuilder: (context, index) {

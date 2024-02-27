@@ -27,6 +27,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   TextEditingController _categoryController = TextEditingController();
   TextEditingController _quantityController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  TextEditingController _discountController = TextEditingController(text: "0");
 
   //select Product image
   pickProductImage(bool isCamera) async {
@@ -41,6 +42,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       showMessageSnackBar(message: "Image can't be empty", context: context);
     } else {
       bool value = await productController.createNewProduct(
+        discount: double.parse(_discountController.text),
         description: descriptionController.text,
         category: _categoryController.text,
         color: _selectedColor.text,
@@ -65,7 +67,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
         name: _productName.text,
         currentPrice: double.parse(_priceController.text),
         quantity: int.parse(_quantityController.text),
-        //discount: double.parse(_discountController.text),
+        discount: double.parse(_discountController.text),
         productId: widget.product!.productId
       ),
     );
@@ -129,6 +131,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       _priceController.text = widget.product!.currentPrice!.toString();
       _quantityController.text = widget.product!.quantity!.toString();
       _selectedColor.text = widget.product!.color!.toString();
+      _discountController.text = widget.product!.discount!.toString();
     }
     super.initState();
   }
@@ -333,6 +336,8 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
                         MyText(text: 'Discount', fontSize: 16),
                         SizedBox(height: 10),
                         TextFormField(
+                          controller: _discountController,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             hintText: "",
                             filled: true,

@@ -7,7 +7,7 @@ import 'package:delivery_app/models/productModel.dart';
 import 'package:flutter/material.dart';
 
 class ProductCardWidget extends StatelessWidget {
-   ProductCardWidget({
+  ProductCardWidget({
     super.key,
     required this.product,
     required this.onTap,
@@ -22,11 +22,10 @@ class ProductCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.only(left: 15,right: 15),
+        margin: EdgeInsets.only(left: 15, right: 15),
         padding: EdgeInsets.only(left: 10, right: 15, bottom: 10, top: 10),
         decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(10)),
+            color: backgroundColor, borderRadius: BorderRadius.circular(10)),
         child: Row(
           children: [
             Container(
@@ -62,12 +61,14 @@ class ProductCardWidget extends StatelessWidget {
             CircleAvatar(
               backgroundColor: Colors.grey.shade200,
               child: IconButton(
-                  onPressed: () {
-                    ///add product to cart
-                    cartController.addToCart(
-                        CartModel(id: product.productId!, quantity: 1), 1);
-                  },
-                  icon: Icon(Icons.shopping_bag, color: ThemeConstant.primaryColor)),
+                onPressed: () {
+                  ///add product to cart
+                  cartController.addToCart(
+                      CartModel(id: product.productId!, quantity: 1), 1);
+                },
+                icon:
+                    Icon(Icons.shopping_bag, color: ThemeConstant.primaryColor),
+              ),
             )
           ],
         ),

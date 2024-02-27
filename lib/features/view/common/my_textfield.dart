@@ -7,16 +7,19 @@ class MyTextFormField extends StatelessWidget {
       required this.emailController,
       required this.hintText,
       required this.icon,
+      this.isEmail = false,
       this.iconColor = Colors.lightGreen});
 
   final TextEditingController emailController;
   final String hintText;
   final IconData icon;
+  final bool isEmail;
   Color iconColor;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
       controller: emailController,
       validator: (value){
         if(value == null || value == ""){

@@ -79,6 +79,7 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
+  ///to show cart image when cart is empty
   Center _emptyCartIconWidget(BuildContext context) {
     return Center(
       child: Column(
@@ -220,71 +221,70 @@ class _CartScreenState extends State<CartScreen> {
   //modal dialog to show the checkout
   Future<dynamic> _checkOutButtomDialog() {
     return showModalBottomSheet(
-        context: context,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        )),
-        builder: (context) {
-          return Container(
-            padding: EdgeInsets.only(top: 30, left: 25, right: 25, bottom: 30),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    MyText(
-                        text: "Item Total",
-                        fontSize: 15,
-                        color: Colors.grey.shade700),
-                    MyText(
-                        text: "\$${cartController.totalAmount}", fontSize: 15),
-                  ],
-                ),
-                SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    MyText(
-                        text: "Delivery Charge",
-                        fontSize: 15,
-                        color: Colors.grey.shade700),
-                    MyText(text: "\$10", fontSize: 15),
-                  ],
-                ),
-                Divider(height: 40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    MyText(
-                        text: "Total",
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
-                    MyText(
-                        text: "\$${cartController.totalAmount + 10}",
-                        fontWeight: FontWeight.w500),
-                  ],
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 45,
-                  margin: EdgeInsets.only(top: 20),
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      navigatorPushReplacement(context, SelectAddressScreen());
-                    },
-                    child: Text("Order Now"),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: ThemeConstant.primaryColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
+      context: context,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(10),
+        topRight: Radius.circular(10),
+      )),
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.only(top: 30, left: 25, right: 25, bottom: 30),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MyText(
+                      text: "Item Total",
+                      fontSize: 15,
+                      color: Colors.grey.shade700),
+                  MyText(text: "\$${cartController.totalAmount}", fontSize: 15),
+                ],
+              ),
+              SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MyText(
+                      text: "Delivery Charge",
+                      fontSize: 15,
+                      color: Colors.grey.shade700),
+                  MyText(text: "\$10", fontSize: 15),
+                ],
+              ),
+              Divider(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MyText(
+                      text: "Total", fontSize: 15, fontWeight: FontWeight.w500),
+                  MyText(
+                      text: "\$${cartController.totalAmount + 10}",
+                      fontWeight: FontWeight.w500),
+                ],
+              ),
+              Container(
+                width: double.infinity,
+                height: 45,
+                margin: EdgeInsets.only(top: 20),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    navigatorPushReplacement(context, SelectAddressScreen());
+                  },
+                  child: Text("Order Now"),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
-                )
-              ],
-            ),
-          );
-        });
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 }

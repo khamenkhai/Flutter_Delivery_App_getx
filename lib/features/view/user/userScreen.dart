@@ -28,16 +28,21 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
   int currentIndex = 0;
-  CategoryRepository categoryRepository = CategoryRepository(firestore: FirebaseConstant.firestore);
-  ProductRepository productRepository = ProductRepository(firestore: FirebaseConstant.firestore);
-  UserProductRepository userProductRepository= UserProductRepository(firestore: FirebaseConstant.firestore);
-  UserOrderRepository userOrderRepository = UserOrderRepository(firestore: FirebaseConstant.firestore);
+  CategoryRepository categoryRepository =
+      CategoryRepository(firestore: FirebaseConstant.firestore);
+  ProductRepository productRepository =
+      ProductRepository(firestore: FirebaseConstant.firestore);
+  UserProductRepository userProductRepository =
+      UserProductRepository(firestore: FirebaseConstant.firestore);
+  UserOrderRepository userOrderRepository =
+      UserOrderRepository(firestore: FirebaseConstant.firestore);
 
   @override
   void initState() {
     Get.put(CategoryController(categoryRepository: categoryRepository));
     Get.put(ProductController(productRepository: productRepository));
-    Get.put(UserProductController(userProductRepository: userProductRepository));
+    Get.put(
+        UserProductController(userProductRepository: userProductRepository));
     Get.put(UserCartController());
     Get.put(UserOrderController(userOrderRepository: userOrderRepository));
     Get.put(UserController(userRepository: UserRepository()));
@@ -63,28 +68,25 @@ class _UserScreenState extends State<UserScreen> {
       backgroundColor: Colors.white,
       body: _pages[currentIndex],
       bottomNavigationBar: GNav(
-          selectedIndex: currentIndex,
-          onTabChange: (value) {
-            changePage(value);
-          },
-          mainAxisAlignment: MainAxisAlignment.center,
-          backgroundColor: Colors.white,
-          
-          gap: 7,
-          activeColor:Colors.lightGreen.shade700,
-          color: Colors.grey.shade400,
-          tabBackgroundColor: Colors.lightGreen.shade50,
-          padding: EdgeInsets.symmetric(horizontal: 22,vertical: 15),
-          tabMargin: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-          tabs: [
-            GButton(
-              icon: Ionicons.home,
-              text: "Home",
-            ),
-            GButton(icon: Ionicons.bag, text: "Order"),
-            GButton(icon: Icons.favorite, text: "Favourites"),
-            GButton(icon: Icons.settings, text: "Setting"),
-          ]),
+        selectedIndex: currentIndex,
+        onTabChange: (value) {
+          changePage(value);
+        },
+        mainAxisAlignment: MainAxisAlignment.center,
+        backgroundColor: Colors.white,
+        gap: 7,
+        activeColor: Colors.lightGreen.shade700,
+        color: Colors.grey.shade400,
+        tabBackgroundColor: Colors.lightGreen.shade50,
+        padding: EdgeInsets.symmetric(horizontal: 19, vertical: 13),
+        tabMargin: EdgeInsets.symmetric(horizontal: 3, vertical: 11),
+        tabs: [
+          GButton(icon: Ionicons.home, text: "Home"),
+          GButton(icon: Ionicons.bag, text: "Order"),
+          GButton(icon: Icons.favorite, text: "Favourites"),
+          GButton(icon: Icons.settings, text: "Setting"),
+        ],
+      ),
     );
   }
 }

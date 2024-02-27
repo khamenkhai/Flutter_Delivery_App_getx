@@ -40,6 +40,9 @@ class ProductRepository {
     if (product.currentPrice != "" && product.currentPrice != null) productInformation['currentPrice'] = product.currentPrice;
     if (product.discount != "" && product.discount != null) productInformation['discount'] = product.discount;
     if (product.productImage != "" && product.productImage != null) productInformation['productImage'] = product.productImage;
+    if (product.discount != "" && product.discount != null) productInformation['discount'] = product.discount;
+
+    print("\n\n\n\n\n\n\nproduct discount : ${product.discount}\n\n\n\n\n\n\n");
 
       await productCollection.doc(product.productId!).update(productInformation);
       return true;

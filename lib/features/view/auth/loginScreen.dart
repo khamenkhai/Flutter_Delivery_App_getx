@@ -62,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     //email text field
                     MyTextFormField(
+                      isEmail: true,
                       emailController: emailController,
                       hintText: "Email",
                       icon: Icons.person,

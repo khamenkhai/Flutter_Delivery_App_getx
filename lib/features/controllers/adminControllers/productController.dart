@@ -32,6 +32,7 @@ class ProductController extends GetxController {
     required double price,
     required String color,
     required int quantity,
+    required double discount,
     required String description,
   }) async {
     loading.value = true;
@@ -48,7 +49,7 @@ class ProductController extends GetxController {
       productImage: productImage,
       color: color,
       currentPrice: price,
-      discount: 0,
+      discount: discount,
       quantity: quantity,
       rawPrice: 0,
       description: description,

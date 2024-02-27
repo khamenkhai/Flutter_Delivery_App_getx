@@ -22,20 +22,26 @@ class OrderSuccessScreen extends StatelessWidget {
             ),
             SizedBox(height: 25),
             MyText(
-                text: "Order Placed!!",
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
+              text: "Order Placed!!",
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
             SizedBox(height: 25),
             Container(
-                margin: EdgeInsets.symmetric(horizontal: 35),
-                child: MyText(
-                    text: "Thanks for choosing us for delivering your needs!",
-                    textAlign: TextAlign.center)),
+              margin: EdgeInsets.symmetric(horizontal: 35),
+              child: MyText(
+                  text: "Thanks for choosing us for delivering your needs!",
+                  textAlign: TextAlign.center),
+            ),
             SizedBox(height: 150),
             PrimaryButton(
               text: "Go Back To Home",
               onTap: () {
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>UserScreen()), (route) => true);
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => UserScreen()),
+                  (route) => true,
+                );
               },
             ),
           ],

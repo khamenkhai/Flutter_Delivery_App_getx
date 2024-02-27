@@ -26,30 +26,35 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       child: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
+          ///custom app bar
           _homeAppBar(),
+
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 10),
-                Obx(() => GridView.builder(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: categoryController.categories.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 15,
-                        crossAxisSpacing: 10,
-                        childAspectRatio: 0.75,
-                      ),
-                      itemBuilder: (context, index) {
-                        CategoryModel category =
-                            categoryController.categories[index];
-                        return _categoryGridWidget(category, context);
-                      },
-                    )),
+
+                ///show all categories with gridview
+                Obx(
+                  () => GridView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: categoryController.categories.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 15,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: 0.75,
+                    ),
+                    itemBuilder: (context, index) {
+                      CategoryModel category =
+                          categoryController.categories[index];
+                      return _categoryGridWidget(category, context);
+                    },
+                  ),
+                ),
                 SizedBox(height: 70),
               ],
             ),
@@ -108,6 +113,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     );
   }
 
+  ///category card widget to show each category
   GestureDetector _categoryGridWidget(
       CategoryModel category, BuildContext context) {
     return GestureDetector(
@@ -125,11 +131,10 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           borderRadius: BorderRadius.circular(6),
           boxShadow: [
             BoxShadow(
-              offset: Offset(0, 10),
-              blurRadius: 10,
-              color: Colors.grey.shade200
-            )
-          ]
+                offset: Offset(0, 10),
+                blurRadius: 10,
+                color: Colors.grey.shade100)
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -137,19 +142,23 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
             Container(
               width: double.infinity,
               height: 100,
-              padding: EdgeInsets.all(18),
+              padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
                 color: getColorByCode(category.colorCode).withOpacity(0.3),
-               // image: DecorationImage(image: NetworkImage("${category.categoryImage}"),fit: BoxFit.cover)
               ),
-              child: Image.network("${category.categoryImage}",fit: BoxFit.cover,),
+              child: Image.network("${category.categoryImage}",
+                  fit: BoxFit.contain),
             ),
-            SizedBox(height: 13),
+            SizedBox(height: 9),
             FittedBox(
               child: Container(
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  child: MyText(text: category.categoryName, fontSize: 15)),
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: MyText(
+                  text: category.categoryName,
+                  fontSize: 15,
+                ),
+              ),
             ),
           ],
         ),
@@ -157,6 +166,9 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     );
   }
 
+
+
+  ///cusom sliver appbar
   SliverAppBar _homeAppBar() {
     return SliverAppBar(
       automaticallyImplyLeading: false,
@@ -167,7 +179,6 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       actions: [
         IconButton(
             onPressed: () {
-              //
               navigatorPush(
                   context, CartScreen(), PageTransitionType.rightToLeft);
             },

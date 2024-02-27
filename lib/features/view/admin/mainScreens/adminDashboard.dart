@@ -4,7 +4,6 @@ import 'package:delivery_app/features/view/admin/dashboardSubScreen/allProducts.
 import 'package:delivery_app/features/view/admin/dashboardSubScreen/allCategoriesScreen.dart';
 import 'package:delivery_app/features/view/admin/dashboardSubScreen/totalSale.dart';
 import 'package:delivery_app/features/view/admin/mainScreens/deliveryScreen.dart';
-import 'package:delivery_app/features/view/admin/mainScreens/lineChart.dart';
 import 'package:delivery_app/features/view/admin/mainScreens/totalOrders.dart';
 import 'package:delivery_app/features/view/admin/widgets/mytextwidget.dart';
 import 'package:delivery_app/const/utils.dart';
@@ -13,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
+
+///admin dashboard home screen
 class AdminDashboardScreen extends StatefulWidget {
   const AdminDashboardScreen({super.key});
 
@@ -24,6 +25,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   @override
   void initState() {
     orderController.getAllOrders();
+    driverController.getDrivers();
+    deliveryController.getAllDeliveries();
     super.initState();
   }
 
@@ -37,8 +40,6 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Icon(Ionicons.restaurant, size: 17, color: Colors.lightGreen),
-            // SizedBox(width: 10),
             Text("Admin Dashboard"),
           ],
         ),
@@ -60,7 +61,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                               child: _gridWidget(
                                   image: "assets/images/sale.png",
                                   title: "Total Sales",
-                                  subtitle: "${orderController.getTotalSales()}",
+                                  subtitle: "${orderController.getTotalSales()} MMK",
                                   iconColor: Colors.orange,
                                   icon: Ionicons.cart,
                                   onTap: () {
@@ -132,7 +133,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                                 icon: Icons.delivery_dining,
                                 iconColor: Colors.amber,
                                 height: 200,
-                                subtitle: "${orderController.allOrders.length}",
+                                subtitle: "${deliveryController.allDeliveries.length}",
                                 onTap: () {
                                   navigatorPush(context, DeliveryScreen());
                                 },
@@ -142,7 +143,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                         ),
                         SizedBox(height: 45),
                             
-                       // Container(height: 500,width: MediaQuery.of(context).size.height,child: LineChartSample2())
+                       //Container(height: 500,width: MediaQuery.of(context).size.height,child: LineChartSample2())
                       ],
                     ),
                   ],
@@ -185,17 +186,19 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     child: Icon(icon, color: Colors.white, size: 18),
                   ),
                   SizedBox(width: 12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MyText(text: "${title}"),
-                      SizedBox(height: 5),
-                      MyText(
-                        text: "${subtitle}",
-                        fontWeight: FontWeight.w500,
-                        fontSize: 19,
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText(text: "${title}"),
+                        SizedBox(height: 5),
+                        MyText(
+                          text: "${subtitle}",
+                          fontWeight: FontWeight.w500,
+                          fontSize: 19,
+                        ),
+                      ],
+                    ),
                   )
                 ],
               )

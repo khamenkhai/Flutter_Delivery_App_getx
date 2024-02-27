@@ -19,6 +19,7 @@ class UserOrderScreen extends StatefulWidget {
 class _UserOrderScreenState extends State<UserOrderScreen> {
   @override
   void initState() {
+    ///getting current user's orders at the initial state
     userOrderController.getUserOrders(CurrentUser.uid.toString());
     super.initState();
   }
@@ -31,18 +32,21 @@ class _UserOrderScreenState extends State<UserOrderScreen> {
         backgroundColor: Colors.transparent,
         title: Text("My Orders"),
       ),
-      body: Obx(() => userOrderController.loading.value
-          ? loadingWidget()
-          : ListView.separated(
-              padding: EdgeInsets.only(top: 15),
-              itemCount: userOrderController.userOrders.length,
-              separatorBuilder: (context, index) {
-                return SizedBox(height: 10);
-              },
-              itemBuilder: (context, index) {
-                OrderModel order = userOrderController.userOrders[index];
-                return _userOrderCardWidget(order);
-              })),
+      body: Obx(
+        () => userOrderController.loading.value
+            ? loadingWidget()
+            : ListView.separated(
+                padding: EdgeInsets.only(top: 15),
+                itemCount: userOrderController.userOrders.length,
+                separatorBuilder: (context, index) {
+                  return SizedBox(height: 10);
+                },
+                itemBuilder: (context, index) {
+                  OrderModel order = userOrderController.userOrders[index];
+                  return _userOrderCardWidget(order);
+                },
+              ),
+      ),
     );
   }
 
@@ -108,7 +112,7 @@ class _UserOrderScreenState extends State<UserOrderScreen> {
                 ),
                 SizedBox(height: 10),
 
-                //order items
+                //order item list
                 ListView.builder(
                   itemCount: order.products.length,
                   shrinkWrap: true,
@@ -117,9 +121,10 @@ class _UserOrderScreenState extends State<UserOrderScreen> {
                         .where((e) => e.productId == order.products[index].id)
                         .first;
                     return MyText(
-                        text:
-                            "${product.name}  x${order.products[index].quantity}",
-                        fontSize: 14);
+                      text:
+                          "${product.name}  x${order.products[index].quantity}",
+                      fontSize: 14,
+                    );
                   },
                 )
               ],

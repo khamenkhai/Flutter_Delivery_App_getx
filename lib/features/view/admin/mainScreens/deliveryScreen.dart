@@ -35,10 +35,12 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      appBar: AppBar(title: Text("Deliveries"), backgroundColor: Colors.white),
-      body: Column(
-        children: [
-          Container(
+      appBar: AppBar(
+        title: Text("Deliveries"),
+        backgroundColor: Colors.white,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(50),
+          child: Container(
             width: double.infinity,
             padding: EdgeInsets.only(bottom: 15, right: 0),
             decoration: BoxDecoration(color: Colors.white),
@@ -65,6 +67,10 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
               ),
             ),
           ),
+        ),
+      ),
+      body: Column(
+        children: [
           Expanded(
             child: Obx(
               () => deliveryController.loading.value
@@ -72,62 +78,70 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                   : Column(
                       children: [
                         Expanded(
-                          child: currrentStatus == DeliveryStatus.pending
-                              ? ListView.separated(
-                                  padding: EdgeInsets.only(
-                                      top: 10, left: 10, right: 10),
-                                  itemCount: deliveryController
-                                      .pendingDeliveries.length,
-                                  separatorBuilder: (context, index) {
-                                    return SizedBox(height: 10);
-                                  },
-                                  itemBuilder: (context, index) {
-                                    return _deliveryCardWidget(
-                                        deliveryController
-                                            .pendingDeliveries[index],
-                                        context);
-                                  },
-                                )
-                              : currrentStatus == DeliveryStatus.active
-                                  ?
+                          child:
 
-                                  /// active**********
-
-                                  ListView.separated(
+                              ///pending delivery list
+                              currrentStatus == DeliveryStatus.pending
+                                  ? ListView.separated(
                                       padding: EdgeInsets.only(
                                           top: 10, left: 10, right: 10),
                                       itemCount: deliveryController
-                                          .onWayDeliveries.length,
+                                          .pendingDeliveries.length,
                                       separatorBuilder: (context, index) {
                                         return SizedBox(height: 10);
                                       },
                                       itemBuilder: (context, index) {
                                         return _deliveryCardWidget(
                                             deliveryController
-                                                .onWayDeliveries[index],
+                                                .pendingDeliveries[index],
                                             context);
                                       },
                                     )
-                                  : currrentStatus == DeliveryStatus.complete
-                                      ?
+                                  :
 
-                                      ///completed orders orders **********
-                                      ListView.separated(
+                                  ///active delivery list
+                                  currrentStatus == DeliveryStatus.active
+                                      ? ListView.separated(
                                           padding: EdgeInsets.only(
                                               top: 10, left: 10, right: 10),
                                           itemCount: deliveryController
-                                              .completedDeliveries.length,
+                                              .onWayDeliveries.length,
                                           separatorBuilder: (context, index) {
                                             return SizedBox(height: 10);
                                           },
                                           itemBuilder: (context, index) {
                                             return _deliveryCardWidget(
-                                                deliveryController
-                                                    .completedDeliveries[index],
-                                                context);
+                                              deliveryController
+                                                  .onWayDeliveries[index],
+                                              context,
+                                            );
                                           },
                                         )
-                                      : Container(),
+                                      :
+                                      ///completed delivery list
+                                       currrentStatus ==
+                                              DeliveryStatus.complete
+                                          ?
+
+                                          ///completed orders orders **********
+                                          ListView.separated(
+                                              padding: EdgeInsets.only(
+                                                  top: 10, left: 10, right: 10),
+                                              itemCount: deliveryController
+                                                  .completedDeliveries.length,
+                                              separatorBuilder:
+                                                  (context, index) {
+                                                return SizedBox(height: 10);
+                                              },
+                                              itemBuilder: (context, index) {
+                                                return _deliveryCardWidget(
+                                                    deliveryController
+                                                            .completedDeliveries[
+                                                        index],
+                                                    context);
+                                              },
+                                            )
+                                          : Container(),
                         ),
                       ],
                     ),
@@ -172,7 +186,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
 
 Widget _deliveryCardWidget(DeliveryModel delivery, BuildContext context) {
   return GestureDetector(
-    onTap: (){
+    onTap: () {
       navigatorPush(context, DeliveryDetail(delivery: delivery));
     },
     child: Container(
@@ -236,6 +250,7 @@ Widget _deliveryCardWidget(DeliveryModel delivery, BuildContext context) {
                       size: 20,
                       color: Colors.lightGreen,
                     ),
+                    SizedBox(width: 6),
                     Text(
                       "${delivery.deliveryManName}",
                     ),

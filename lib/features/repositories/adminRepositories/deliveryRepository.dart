@@ -64,7 +64,7 @@ class DeliveryRepository {
 
   Stream<List<DeliveryModel>> getAllDeliveries() {
     return firestore
-        .collection(FirebaseConstant.deliveryCollection).orderBy('field')
+        .collection(FirebaseConstant.deliveryCollection).orderBy('orderTime',descending: true)
         .snapshots()
         .map((event) => event.docs
                 // ignore: unnecessary_cast
