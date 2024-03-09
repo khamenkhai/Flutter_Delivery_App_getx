@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:delivery_app/const/utils.dart';
 import 'package:delivery_app/features/repositories/adminRepositories/categoryRepo.dart';
-import 'package:delivery_app/features/repositories/adminRepositories/storageRepository.dart';
+import 'package:delivery_app/features/repositories/storageRepository/storageRepository.dart';
 import 'package:delivery_app/models/categoryModel.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +30,7 @@ class CategoryController extends GetxController {
       required Uint8List photo,
       required String colorcode}) async {
     loading.value = true;
-    String categoryImage = await storeFileInFirebase(
+    String categoryImage = await FirebaseStorageRepository.storeFileInFirebase(
       fileName: categoryName,
       imageData: photo,
       path: "DAcategories",

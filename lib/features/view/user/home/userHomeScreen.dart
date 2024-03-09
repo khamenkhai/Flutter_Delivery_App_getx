@@ -67,10 +67,10 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       CategoryModel category, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        userProductController.getProductsbyCategory(category.categoryName);
+        userProductController.getProductsbyCategory(category.categoryName.toString());
         navigatorPush(
           context,
-          ProductByCategory(category: category.categoryName),
+          ProductByCategory(category: category.categoryName.toString()),
         );
       },
       child: Container(
@@ -95,7 +95,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                color: getColorByCode(category.colorCode).withOpacity(0.3),
+                color: getColorByCode(category.colorCode.toString()).withOpacity(0.3),
               ),
               child: Image.network(
                 "${category.categoryImage}",
@@ -103,13 +103,19 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
               ),
             ),
             SizedBox(height: 9),
-            FittedBox(
-              child: Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: MyText(
-                  text: category.categoryName,
-                  fontSize: 15,
-                ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 10, right: 10),
+                    child: MyText(
+                      text: category.categoryName.toString(),
+                      fontSize: 13,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

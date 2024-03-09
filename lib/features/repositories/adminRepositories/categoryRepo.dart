@@ -1,5 +1,4 @@
 // ignore_for_file: unnecessary_cast
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/models/categoryModel.dart';
 import 'package:delivery_app/const/const.dart';

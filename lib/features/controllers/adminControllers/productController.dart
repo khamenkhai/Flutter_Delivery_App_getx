@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:delivery_app/const/utils.dart';
 import 'package:delivery_app/features/repositories/adminRepositories/productRepositoryes.dart';
-import 'package:delivery_app/features/repositories/adminRepositories/storageRepository.dart';
+import 'package:delivery_app/features/repositories/storageRepository/storageRepository.dart';
 import 'package:delivery_app/models/productModel.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +36,7 @@ class ProductController extends GetxController {
     required String description,
   }) async {
     loading.value = true;
-    String productImage = await storeFileInFirebase(
+    String productImage = await FirebaseStorageRepository.storeFileInFirebase(
       fileName: name,
       imageData: photo,
       path: "DAproducts",
@@ -67,7 +67,7 @@ class ProductController extends GetxController {
     loading.value = true;
     String? productImage;
    if(file!=null){
-     productImage = await storeFileInFirebase(
+     productImage = await FirebaseStorageRepository.storeFileInFirebase(
       fileName: product.name.toString(),
       imageData: file,
       path: "DAproducts",

@@ -5,7 +5,6 @@ import 'package:delivery_app/features/view/user/commonWidgets/cartbadgeWidget.da
 import 'package:delivery_app/models/cartModel.dart';
 import 'package:delivery_app/models/productModel.dart';
 import 'package:delivery_app/features/view/user/commonWidgets/productCardWidget.dart';
-import 'package:delivery_app/features/view/user/home/homeSubScreeen/cartScreen.dart';
 import 'package:delivery_app/features/view/user/home/homeSubScreeen/productDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

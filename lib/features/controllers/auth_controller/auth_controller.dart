@@ -1,4 +1,4 @@
-import 'package:delivery_app/features/repositories/auth_repo/auth_repo.dart';
+import 'package:delivery_app/features/repositories/authReposioory/authRepository.dart';
 import 'package:delivery_app/features/repositories/storageRepository/storageRepository.dart';
 import 'package:delivery_app/features/repositories/userRepositories/userRepository.dart';
 import 'package:delivery_app/models/userModel.dart';
@@ -18,7 +18,7 @@ class AuthController extends GetxController {
   Rx<UserModel?> _user = Rx<UserModel?>(null);
 
   UserModel? get user => _user.value;
-  //Rx<User?> loginUser = Rx<User?>(null);
+
 
   var loginStatus = false.obs;
 

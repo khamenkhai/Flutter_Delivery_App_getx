@@ -21,8 +21,8 @@ class _UserSettingScreenScreenState extends State<UserSettingScreenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
-      appBar: AppBar(title: Text("Settings"), elevation: 0.2),
+      backgroundColor: Colors.grey.shade50.withOpacity(0.3),
+      appBar: AppBar(title: Text("Settings"), elevation: 0),
       body: Container(
         padding: EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 20),
         child: Column(

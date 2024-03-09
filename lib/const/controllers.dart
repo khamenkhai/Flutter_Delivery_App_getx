@@ -1,4 +1,4 @@
-import 'package:delivery_app/features/controllers/auth/auth_controller/auth_controller.dart';
+import 'package:delivery_app/features/controllers/auth_controller/auth_controller.dart';
 import 'package:delivery_app/features/controllers/adminControllers/categoryController.dart';
 import 'package:delivery_app/features/controllers/adminControllers/deliveryController.dart';
 import 'package:delivery_app/features/controllers/adminControllers/driverController.dart';

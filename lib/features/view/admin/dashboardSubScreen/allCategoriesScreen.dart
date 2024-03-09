@@ -23,7 +23,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         onPressed: () {
           navigatorPush(context, CreateCategoryScreen());
         },
-        child: Icon(Icons.add,color: Colors.white),
+        child: Icon(Icons.add, color: Colors.white),
       ),
       body: Obx(() => GridView.builder(
             itemCount: categoryController.categories.length,
@@ -54,16 +54,18 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         children: [
                           SizedBox(height: 25),
                           Image.network(
-                            category.categoryImage,
+                            category.categoryImage.toString(),
                             width: 85,
                             height: 85,
                             fit: BoxFit.cover,
                           ),
                           SizedBox(height: 18),
                           Container(
-                              padding: EdgeInsets.only(left: 10, right: 10),
-                              child: MyText(
-                                  text: category.categoryName, fontSize: 15)),
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                            child: MyText(
+                                text: category.categoryName.toString(),
+                                fontSize: 15),
+                          ),
                         ],
                       ),
                     ),

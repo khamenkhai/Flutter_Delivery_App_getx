@@ -91,13 +91,11 @@ class DriverDeliveryRepository {
     DeliveryModel delivery = DeliveryModel.fromJson(
       snap.data() as Map<String, dynamic>,
     );
-    //print("delivery from (addCompletedDeliverytoHistory) : ${delivery.address} ${delivery.deliveredTime}");
-
+   
     if (delivery.deliveredTime != null &&
         delivery.deliveredTime!.isBefore(
           DateTime.now().subtract(Duration(days: 1)),
         )) {
-      //print("Already passed!!!");
       await firestore
           .collection(FirebaseConstant.deliveryCollection)
           .doc(deliveryId)

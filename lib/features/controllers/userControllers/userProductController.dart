@@ -42,12 +42,8 @@ class UserProductController extends GetxController {
   }
 
   //search product
-  Future<List<ProductModel>> searchProducts(String query) async {
-    // loading.value = true;
-    // List<ProductModel> results = await userProductRepository.getAllProducts();
-    // await Future.delayed(Duration(milliseconds: 100));
-    // loading.value = false;
-    // return results.where((element) => element.name!.toLowerCase() == query.toLowerCase()).toList();
+  searchProducts(String query) async {
+
     loading.value = true;
     List<ProductModel> results = await userProductRepository.getAllProducts();
     _searchedProducts.clear();
@@ -57,13 +53,6 @@ class UserProductController extends GetxController {
       final input = query.toLowerCase();
       return result.contains(input);
     }).toList());
-
-    return [];
-    // return results.where((element) {
-    //   final result = "${element.name}".toLowerCase();
-    //   final input = query.toLowerCase();
-    //   return result.contains(input);
-    // }).toList();
   }
 
   ///add product to fav

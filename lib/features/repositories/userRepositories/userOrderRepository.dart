@@ -1,3 +1,4 @@
+// ignore_for_file: unnecessary_cast
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/const/const.dart';
 import 'package:delivery_app/const/fbConst.dart';
@@ -45,13 +46,11 @@ class UserOrderRepository {
     return firestore
         .collection(FirebaseConstant.userOrderCollection)
         .where("userId", isEqualTo: userId)
-        // .where('orderStatus',isNotEqualTo: OrderStatus.history)
         .orderBy("time", descending: true)
         .snapshots()
         .map((event) {
       print("current orders length : ${event.docs.length}");
       return event.docs
-          // ignore: unnecessary_cast
           .map((e) => OrderModel.fromJson(e.data() as Map<String, dynamic>))
           .toList();
     });
@@ -66,7 +65,6 @@ class UserOrderRepository {
         .map((event) {
       print("order history count : ${event.docs.length}");
       return event.docs
-          // ignore: unnecessary_cast
           .map((e) => OrderModel.fromJson(e.data() as Map<String, dynamic>))
           .toList();
     });

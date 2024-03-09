@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_cast
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/const/fbConst.dart';
 import 'package:delivery_app/models/productModel.dart';
@@ -15,7 +17,6 @@ class UserProductRepository {
         .where('category', isEqualTo: category)
         .snapshots()
         .map((event) => event.docs
-            // ignore: unnecessary_cast
             .map((e) => ProductModel.fromJson(e.data() as Map<String, dynamic>))
             .toList());
   }
@@ -35,7 +36,6 @@ class UserProductRepository {
   //search products
   Future<List<ProductModel>> getAllProducts()async{
     return firestore.collection(FirebaseConstant.prooductCollection).get().then((value){
-      // ignore: unnecessary_cast
       return value.docs.map((e) => ProductModel.fromJson(e.data() as Map<String,dynamic>)).toList();
     });
   }
