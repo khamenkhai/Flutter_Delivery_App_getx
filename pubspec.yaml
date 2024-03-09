@@ -55,6 +55,8 @@ dependencies:
   firebase_crashlytics: ^3.4.8
   dot_navigation_bar: ^1.0.2
   signature: ^5.4.1
+  get_it: ^7.6.7
+  shortid: ^0.1.2
 
 
 dev_dependencies:

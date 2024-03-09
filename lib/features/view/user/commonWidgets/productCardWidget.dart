@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 import 'package:delivery_app/features/view/admin/widgets/mytextwidget.dart';
-import 'package:delivery_app/const/const.dart';
 import 'package:delivery_app/const/controllers.dart';
 import 'package:delivery_app/models/cartModel.dart';
 import 'package:delivery_app/models/productModel.dart';
@@ -67,7 +66,7 @@ class ProductCardWidget extends StatelessWidget {
                       CartModel(id: product.productId!, quantity: 1), 1);
                 },
                 icon:
-                    Icon(Icons.shopping_bag, color: ThemeConstant.primaryColor),
+                    Icon(Icons.shopping_bag, color: Colors.grey.shade900,),
               ),
             )
           ],

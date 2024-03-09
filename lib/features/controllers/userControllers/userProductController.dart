@@ -15,7 +15,9 @@ class UserProductController extends GetxController {
 
   ProductModel get product => _product.value;
 
-  // List<ProductModel> get getSearchProducts(String query) => searchProducts(query);
+  RxList<ProductModel> _searchedProducts = RxList<ProductModel>();
+
+  List<ProductModel> get getSearchProducts => _searchedProducts;
 
   var loading = false.obs;
 
@@ -37,23 +39,35 @@ class UserProductController extends GetxController {
   //get product detail by id
   Stream<ProductModel> getProductById(String productId) {
     return userProductRepository.getProductById(productId);
-    // loading.value = true;
-    // await Future.delayed(Duration(milliseconds: 300));
-    // _product.bindStream(userProductRepository.getProductById(productId));
-    // loading.value = false;
   }
 
   //search product
-  Future<List<ProductModel>> searchProducts(String query)async{
+  Future<List<ProductModel>> searchProducts(String query) async {
+    // loading.value = true;
+    // List<ProductModel> results = await userProductRepository.getAllProducts();
+    // await Future.delayed(Duration(milliseconds: 100));
+    // loading.value = false;
+    // return results.where((element) => element.name!.toLowerCase() == query.toLowerCase()).toList();
     loading.value = true;
     List<ProductModel> results = await userProductRepository.getAllProducts();
-    await Future.delayed(Duration(milliseconds: 100));
+    _searchedProducts.clear();
     loading.value = false;
-    return results.where((element) => element.name!.toLowerCase() == query.toLowerCase()).toList();
+    _searchedProducts.addAll(results.where((element) {
+      final result = "${element.name}".toLowerCase();
+      final input = query.toLowerCase();
+      return result.contains(input);
+    }).toList());
+
+    return [];
+    // return results.where((element) {
+    //   final result = "${element.name}".toLowerCase();
+    //   final input = query.toLowerCase();
+    //   return result.contains(input);
+    // }).toList();
   }
 
   ///add product to fav
-  addProductToFav({required String productId}){
+  addProductToFav({required String productId}) {
     userProductRepository.setProductToFav(productId: productId);
   }
 }

@@ -1,6 +1,6 @@
 import 'package:delivery_app/features/view/admin/widgets/mytextwidget.dart';
 import 'package:delivery_app/features/view/user/commonWidgets/primaryButton.dart';
-import 'package:delivery_app/features/view/user/userScreen.dart';
+import 'package:delivery_app/features/view/user/userMainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

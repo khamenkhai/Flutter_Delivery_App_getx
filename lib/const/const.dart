@@ -12,15 +12,6 @@ abstract class Constant {
   static const String LANGUAGE_CODE_EN = "en";
 }
 
-abstract class ThemeConstant {
-  static final Color primaryColor = Colors.grey.shade900;
-  static final Color secondaryTextColor = Colors.grey.shade700;
-  //static final Color backgroundColor= Colors.grey.shade300;
-  static final Color backgroundColor = Colors.white;
-  static final Color cardColor = Colors.grey.shade100;
-  //static final Color cardColor = Colors.grey.shade200;
-}
-
 class OrderStatus {
   //order status
   static final String pending = "Pending";

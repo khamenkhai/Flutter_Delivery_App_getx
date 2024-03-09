@@ -33,6 +33,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 
+
+  ///main product detail widget
   Widget _detailWidget(BuildContext context) {
     return StreamBuilder<ProductModel>(
       stream: userProductController.getProductById(widget.productId),

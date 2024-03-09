@@ -1,7 +1,7 @@
 import 'package:delivery_app/features/view/admin/widgets/mytextwidget.dart';
-import 'package:delivery_app/const/const.dart';
 import 'package:delivery_app/const/controllers.dart';
 import 'package:delivery_app/const/utils.dart';
+import 'package:delivery_app/features/view/user/commonWidgets/cartbadgeWidget.dart';
 import 'package:delivery_app/models/cartModel.dart';
 import 'package:delivery_app/models/productModel.dart';
 import 'package:delivery_app/features/view/user/commonWidgets/productCardWidget.dart';
@@ -25,6 +25,8 @@ class ProductByCategory extends StatefulWidget {
 class _ProductByCategoryState extends State<ProductByCategory> {
   bool viewByList = false;
 
+
+  ///redirect to product detail page
   navigateToProductDetail(ProductModel product) {
     userProductController.getProductById(product.productId!);
     navigatorPush(
@@ -54,14 +56,9 @@ class _ProductByCategoryState extends State<ProductByCategory> {
               });
             },
             icon: Icon(viewByList ? Ionicons.list : Ionicons.grid,
-                size: viewByList ? 20 : 15),
+                size: viewByList ? 22 : 18),
           ),
-          IconButton(
-              onPressed: () {
-                //to go cart
-                navigatorPush(context, CartScreen());
-              },
-              icon: Icon(Ionicons.cart_outline))
+          CartBadgeWidget(context: context)
         ],
       ),
       body: Obx(
@@ -107,6 +104,8 @@ class _ProductByCategoryState extends State<ProductByCategory> {
     );
   }
 
+
+  ///widget to show each projects with grid widet
   GestureDetector _ProductGridWidget(ProductModel product) {
     return GestureDetector(
       onTap: () {
@@ -125,40 +124,51 @@ class _ProductByCategoryState extends State<ProductByCategory> {
               children: [
                 product.discount! > 0
                     ? Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 13, vertical: 4),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 13,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
-                            color: ThemeConstant.primaryColor,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10))),
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
+                          ),
+                        ),
                         child: MyText(
-                            text: "${product.discount}%",
-                            color: Colors.white,
-                            fontSize: 10),
+                          text: "${product.discount}%",
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
                       )
                     : Container(),
                 Container(
-                    padding: EdgeInsets.all(5),
-                    child: Obx(() => InkWell(
-                        onTap: () {
-                          userProductController.addProductToFav(
-                              productId: product.productId.toString());
-                        },
-                        child: authController.user!.favProducts!
-                                .contains(product.productId.toString())
-                            ? Icon(
-                                IconlyBold.heart,
-                                color: Colors.red,
-                              )
-                            : Icon(IconlyLight.heart))))
+                  padding: EdgeInsets.all(5),
+                  child: Obx(
+                    () => InkWell(
+                      onTap: () {
+                        userProductController.addProductToFav(
+                            productId: product.productId.toString());
+                      },
+                      child: authController.user!.favProducts!
+                              .contains(product.productId.toString())
+                          ? Icon(
+                              IconlyBold.heart,
+                              color: Colors.red,
+                            )
+                          : Icon(IconlyLight.heart),
+                    ),
+                  ),
+                )
               ],
             ),
             SizedBox(height: 7),
             Center(
-                child: Hero(
-                    tag: product.productId!,
-                    child: Image.network(product.productImage!, height: 75))),
+              child: Hero(
+                tag: product.productId!,
+                child: Image.network(product.productImage!, height: 75),
+              ),
+            ),
 
             ///product detail
             Container(
@@ -181,13 +191,18 @@ class _ProductByCategoryState extends State<ProductByCategory> {
                         fontSize: 17,
                       ),
                       IconButton(
-                          onPressed: () {
-                            ///add product to cart
-                            cartController.addToCart(
-                                CartModel(id: product.productId!, quantity: 1),
-                                1);
-                          },
-                          icon: Icon(Icons.shopping_bag))
+                        onPressed: () {
+                          ///add product to cart
+                          cartController.addToCart(
+                            CartModel(id: product.productId!, quantity: 1),
+                            1,
+                          );
+                        },
+                        icon: Icon(
+                          Icons.shopping_bag,
+                          color: Colors.black,
+                        ),
+                      )
                     ],
                   )
                 ],
@@ -198,6 +213,4 @@ class _ProductByCategoryState extends State<ProductByCategory> {
       ),
     );
   }
-
-  /////*************************
 }

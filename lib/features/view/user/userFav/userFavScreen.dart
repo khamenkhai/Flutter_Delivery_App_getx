@@ -1,4 +1,3 @@
-import 'package:delivery_app/const/const.dart';
 import 'package:delivery_app/const/controllers.dart';
 import 'package:delivery_app/const/utils.dart';
 import 'package:delivery_app/features/view/admin/widgets/mytextwidget.dart';
@@ -84,7 +83,7 @@ class _UserFavScreenState extends State<UserFavScreen> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 13, vertical: 4),
                         decoration: BoxDecoration(
-                            color: ThemeConstant.primaryColor,
+                            color: Colors.grey.shade900,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 bottomRight: Radius.circular(10))),

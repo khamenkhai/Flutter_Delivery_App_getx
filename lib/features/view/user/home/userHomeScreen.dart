@@ -1,15 +1,13 @@
 import 'package:delivery_app/features/view/admin/widgets/mytextwidget.dart';
-import 'package:delivery_app/const/const.dart';
 import 'package:delivery_app/const/controllers.dart';
 import 'package:delivery_app/const/utils.dart';
+import 'package:delivery_app/features/view/user/commonWidgets/cartbadgeWidget.dart';
 import 'package:delivery_app/models/categoryModel.dart';
-import 'package:delivery_app/features/view/user/home/homeSubScreeen/cartScreen.dart';
 import 'package:delivery_app/features/view/user/home/homeSubScreeen/productsByCategoryScreen.dart';
 import 'package:delivery_app/features/view/user/home/homeSubScreeen/searchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:page_transition/page_transition.dart';
 
 class UserHomeScreen extends StatefulWidget {
   const UserHomeScreen({super.key});
@@ -64,55 +62,6 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     ));
   }
 
-  GestureDetector _categoryGridWidget2(
-      CategoryModel category, BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        userProductController.getProductsbyCategory(category.categoryName);
-        navigatorPush(
-            context, ProductByCategory(category: category.categoryName));
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10)),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Stack(
-            children: [
-              Positioned(
-                left: -33,
-                top: -33,
-                child: CircleAvatar(
-                  radius: 45,
-                  backgroundColor:
-                      getColorByCode(category.colorCode).withOpacity(0.3),
-                ),
-              ),
-              Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 15),
-                    Image.network(
-                      category.categoryImage,
-                      width: 80,
-                      height: 80,
-                    ),
-                    SizedBox(height: 13),
-                    Container(
-                        padding: EdgeInsets.only(left: 10, right: 10),
-                        child:
-                            MyText(text: category.categoryName, fontSize: 15)),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   ///category card widget to show each category
   GestureDetector _categoryGridWidget(
       CategoryModel category, BuildContext context) {
@@ -131,9 +80,10 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           borderRadius: BorderRadius.circular(6),
           boxShadow: [
             BoxShadow(
-                offset: Offset(0, 10),
-                blurRadius: 10,
-                color: Colors.grey.shade100)
+              offset: Offset(0, 10),
+              blurRadius: 10,
+              color: Colors.grey.shade100,
+            )
           ],
         ),
         child: Column(
@@ -147,8 +97,10 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 borderRadius: BorderRadius.circular(6),
                 color: getColorByCode(category.colorCode).withOpacity(0.3),
               ),
-              child: Image.network("${category.categoryImage}",
-                  fit: BoxFit.contain),
+              child: Image.network(
+                "${category.categoryImage}",
+                fit: BoxFit.contain,
+              ),
             ),
             SizedBox(height: 9),
             FittedBox(
@@ -166,8 +118,6 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     );
   }
 
-
-
   ///cusom sliver appbar
   SliverAppBar _homeAppBar() {
     return SliverAppBar(
@@ -177,12 +127,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       title: Text("Home"),
       expandedHeight: 200,
       actions: [
-        IconButton(
-            onPressed: () {
-              navigatorPush(
-                  context, CartScreen(), PageTransitionType.rightToLeft);
-            },
-            icon: Icon(Ionicons.cart_outline))
+        CartBadgeWidget(context: context)
       ],
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
@@ -215,8 +160,8 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     );
   }
 
-  /////*************************
 }
+
 
 class FakeSearchBar extends StatelessWidget {
   const FakeSearchBar({
@@ -236,12 +181,15 @@ class FakeSearchBar extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 15),
         padding: EdgeInsets.only(left: 15),
         decoration: BoxDecoration(
-          color: ThemeConstant.cardColor,
+          color: Colors.grey.shade100,
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
           children: [
-            Icon(Ionicons.search),
+            Icon(
+              Ionicons.search,
+              color: Theme.of(context).primaryColor,
+            ),
             SizedBox(width: 15),
             MyText(text: "Search Items or Products", color: Colors.grey)
           ],

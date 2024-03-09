@@ -14,7 +14,7 @@ class PrimaryButton extends StatelessWidget {
       this.ml = 20,
       this.mr = 20,
       this.borderRadius = 8,
-      this.textColor = Colors.black});
+      this.textColor = Colors.white});
 
   final String text;
   final Function() onTap;
