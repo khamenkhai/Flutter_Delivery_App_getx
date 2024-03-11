@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightGreenTheme,
+      theme: AppTheme.redTheme,
       home: Obx(
         () {
           if (authController.user != null) {

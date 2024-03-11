@@ -12,10 +12,40 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.grey.shade50,
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.white,
-      elevation: 0.07,
+      elevation: 0,
       foregroundColor: Colors.black,
     ),
     buttonTheme: ButtonThemeData(buttonColor: Colors.lightGreen),
+    fontFamily: "inter",
+  );
+
+
+  static ThemeData indigoTheme = ThemeData(
+    useMaterial3: false,
+    primaryColor: Colors.indigo,
+    primarySwatch: Colors.indigo,
+    scaffoldBackgroundColor: Colors.grey.shade50,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      foregroundColor: Colors.black,
+    ),
+    buttonTheme: ButtonThemeData(buttonColor: Colors.indigo),
+    fontFamily: "inter",
+  );
+
+
+  static ThemeData darkGrey = ThemeData(
+    useMaterial3: false,
+    primaryColor: Colors.grey.shade900,
+    primarySwatch: Colors.grey,
+    scaffoldBackgroundColor: Colors.grey.shade50,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      foregroundColor: Colors.black,
+    ),
+    buttonTheme: ButtonThemeData(buttonColor: Colors.grey.shade900),
     fontFamily: "inter",
   );
 
@@ -27,7 +57,7 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.grey.shade50,
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.white,
-      elevation: 0.07,
+      elevation: 0,
       foregroundColor: Colors.black,
     ),
     buttonTheme: ButtonThemeData(buttonColor: Colors.orange),
@@ -42,7 +72,7 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.grey.shade50,
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.white,
-      elevation: 0.07,
+      elevation: 0,
       foregroundColor: Colors.black,
     ),
     buttonTheme: ButtonThemeData(buttonColor: Colors.red),

@@ -85,7 +85,7 @@ class _UserScreenState extends State<UserScreen> {
         gap: 7,
         tabActiveBorder: Border.all(color: Colors.transparent),
         activeColor: Theme.of(context).primaryColor,
-        color: Theme.of(context).primaryColor.withOpacity(0.6),
+        color: Theme.of(context).primaryColor.withOpacity(0.3),
         tabBackgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         tabMargin: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
