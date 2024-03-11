@@ -37,6 +37,7 @@ class _AssignDriverScreenState extends State<AssignDriverScreen> {
       orderTime: widget.order.time,
       deliveryManId: selectedDriverId,
       orderId: widget.order.orderId,
+      customerPaid: widget.order.paid
     ));
     if (result == true) {
       Navigator.pop(context);

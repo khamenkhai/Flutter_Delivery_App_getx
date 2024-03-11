@@ -147,24 +147,27 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                 ),
 
                 //delivered date
-                widget.delivery.status == DeliveryStatus.history ? Container(
-                  margin: EdgeInsets.only(top: 15),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: size.width / 2 - 55,
-                        child: MyText(
-                            text: "Delivered date", fontWeight: FontWeight.bold),
-                      ),
-                      MyText(text: ": "),
-                      Expanded(
-                          child: MyText(
-                              text:
-                                  "${DateFormat('MMMM dd, yyyy hh:mma').format(widget.delivery.deliveredTime!)}")),
-                    ],
-                  ),
-                ) : Container(),
+                widget.delivery.status == DeliveryStatus.history
+                    ? Container(
+                        margin: EdgeInsets.only(top: 15),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: size.width / 2 - 55,
+                              child: MyText(
+                                  text: "Delivered date",
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            MyText(text: ": "),
+                            Expanded(
+                                child: MyText(
+                                    text:
+                                        "${DateFormat('MMMM dd, yyyy hh:mma').format(widget.delivery.deliveredTime!)}")),
+                          ],
+                        ),
+                      )
+                    : Container(),
 
                 Container(
                     padding: EdgeInsets.only(top: 25, bottom: 20),
@@ -202,6 +205,25 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                     Expanded(child: MyText(text: "${widget.delivery.address}")),
                   ],
                 ),
+
+                widget.delivery.customerPaid == true
+                    ? Container(
+                        margin: EdgeInsets.only(top: 15),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: size.width / 2 - 55,
+                              child: MyText(
+                                  text: "Customer Paid",
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            MyText(text: ": "),
+                            Icon(Icons.check_box),
+                          ],
+                        ),
+                      )
+                    : Container(),
 
                 Container(
                     padding: EdgeInsets.only(top: 25, bottom: 20),
@@ -295,30 +317,34 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                 }
               }),
 
-          widget.delivery.status != DeliveryStatus.history ? Center(
-            child: Container(
-              margin: EdgeInsets.only(top: 40),
-              width: 200,
-              height: 45,
-              child: ElevatedButton(
-                onPressed: widget.delivery.status != DeliveryStatus.complete
-                    ? () async {
-                        setDeliveryStatus(context, userSignatureController);
-                      }
-                    : null,
-                child: Text(
-                  widget.delivery.status == DeliveryStatus.pending
-                      ? "Start Delivery"
-                      : widget.delivery.status == DeliveryStatus.active
-                          ? "Complete Delivery"
-                          : "Completed",
-                  style: TextStyle(
-                    color: Colors.white,
+          widget.delivery.status != DeliveryStatus.history
+              ? Center(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 40),
+                    width: 200,
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed:
+                          widget.delivery.status != DeliveryStatus.complete
+                              ? () async {
+                                  setDeliveryStatus(
+                                      context, userSignatureController);
+                                }
+                              : null,
+                      child: Text(
+                        widget.delivery.status == DeliveryStatus.pending
+                            ? "Start Delivery"
+                            : widget.delivery.status == DeliveryStatus.active
+                                ? "Complete Delivery"
+                                : "Completed",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-          ) : Container()
+                )
+              : Container()
         ],
       ),
     );
@@ -448,12 +474,15 @@ class _CompleteDeliveryButtonSheetState
                     widget.signatureController.clear();
                     Navigator.pop(context);
                   },
+                  style:  roundedElevatedStyle(),
                   child: Text("Cancel")),
               ElevatedButton(
-                  onPressed: () async {
-                    widget.onSignatureConfirmed();
-                  },
-                  child: Text("Confirm")),
+                onPressed: () async {
+                  widget.onSignatureConfirmed();
+                },
+                style: roundedElevatedStyle(),
+                child: Text("Confirm"),
+              ),
             ],
           ),
           SizedBox(height: 15),

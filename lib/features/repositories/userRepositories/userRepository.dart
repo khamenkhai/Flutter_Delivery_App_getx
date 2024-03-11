@@ -1,5 +1,4 @@
 // ignore_for_file: unnecessary_cast
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delivery_app/const/const.dart';
 import 'package:delivery_app/const/fbConst.dart';
@@ -72,11 +71,19 @@ class UserRepository {
   }) async {
 
     String transactionId = generateRandomId();
+
+    print("two");
+
     try {
+      
       final currentUser = await _userCollection.doc(CurrentUser.uid).get();
 
-      int currentUserBalance = currentUser["accountBalance"];
+      print("three");
 
+      num currentUserBalance = currentUser["accountBalance"];
+
+      print("four");
+      
       //send to reciever
       await _userCollection
           .doc(CurrentUser.uid)
@@ -91,15 +98,23 @@ class UserRepository {
                 .toMap(),
           );
 
+          print("five");
+
       await _userCollection.doc(CurrentUser.uid).update({
         "accountBalance": currentUserBalance - transaction.amount!,
       });
+
+      print("six");
 
       //received receive from sender
       final receiverUser =
           await _userCollection.doc(transaction.receiverId).get();
 
+      print("seven");
+
       int receiverUserBalance = receiverUser["accountBalance"];
+
+      print("eight");
 
       await _userCollection
           .doc(transaction.receiverId)
@@ -113,12 +128,17 @@ class UserRepository {
                 .toMap(),
           );
 
+        print("nine");
+
       await _userCollection.doc(transaction.receiverId).update({
         "accountBalance": receiverUserBalance + transaction.amount!,
       });
 
+      print("ten");
+
       return true;
     } catch (e) {
+      print("e - transferMoney : ${e}");
       return false;
     }
   }

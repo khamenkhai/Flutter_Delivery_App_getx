@@ -67,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           emailController: nameController,
                           hintText: "Username",
                           icon: Icons.person,
-                          iconColor: Colors.lightGreen,
+                          iconColor: Theme.of(context).primaryColor,
                         ),
                         //phone number text field
                         SizedBox(height: 15),
@@ -75,7 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           emailController: phoneController,
                           hintText: "Phone No.",
                           icon: Icons.phone,
-                          iconColor: Colors.lightGreen,
+                          iconColor: Theme.of(context).primaryColor,
                         ),
                         //email text field
                         SizedBox(height: 15),
@@ -83,7 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           emailController: emailController,
                           hintText: "Email",
                           icon: Icons.person,
-                          iconColor: Colors.lightGreen,
+                          iconColor: Theme.of(context).primaryColor,
                         ),
                         //password text field
                         SizedBox(height: 15),
@@ -101,7 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             filled: true,
                             fillColor: Colors.grey.shade100,
                             prefixIcon:
-                                Icon(Icons.lock, color: Colors.lightGreen),
+                                Icon(Icons.lock, color: Theme.of(context).primaryColor),
                             contentPadding: EdgeInsets.symmetric(vertical: 15),
                             suffixIcon: IconButton(
                                 onPressed: () {
@@ -162,7 +162,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Text(
                             "Login",
                             style: TextStyle(
-                              color: Colors.lightGreen,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         )

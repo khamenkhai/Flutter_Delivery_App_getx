@@ -64,9 +64,9 @@ class _DriverScreenState extends State<DriverScreen> {
               backgroundColor: Colors.transparent,
               gap: 7,
               tabActiveBorder: Border.all(color: Colors.transparent),
-              activeColor: Colors.lightGreen,
+              activeColor: Theme.of(context).primaryColor,
               color: Colors.grey.shade400,
-              tabBackgroundColor: Colors.lightGreen.shade50,
+              tabBackgroundColor: Theme.of(context).primaryColor.withOpacity(0.1),
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               tabMargin: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
               tabs: [

@@ -11,6 +11,7 @@ class DeliveryModel {
   DateTime? deliveredTime;
   final num? totalPrice;
   final String? customerSignature;
+  final bool? customerPaid;
 
   DeliveryModel({
     this.deliveryId,
@@ -24,7 +25,8 @@ class DeliveryModel {
     this.orderTime,
     this.deliveredTime,
    this.totalPrice,
-   this.customerSignature
+   this.customerSignature,
+   required this.customerPaid
   });
 
   factory DeliveryModel.fromJson(Map<String, dynamic> json) {
@@ -38,6 +40,7 @@ class DeliveryModel {
       status:json["status"],
       address:json["address"],
       totalPrice:json["totalPrice"],
+      customerPaid:json["customerPaid"],
       customerSignature:json["customerSignature"],
       orderTime:  DateTime.fromMillisecondsSinceEpoch(json['orderTime']),
       deliveredTime:DateTime.fromMillisecondsSinceEpoch(json['deliveredTime'] ?? 0),
@@ -58,6 +61,7 @@ class DeliveryModel {
       "address":this.address,
       "totalPrice":this.totalPrice,
       "orderTime":this.orderTime?.millisecondsSinceEpoch,
+      "customerPaid":this.customerPaid,
       "deliveredTime":this.deliveredTime?.millisecondsSinceEpoch,
     };
   }

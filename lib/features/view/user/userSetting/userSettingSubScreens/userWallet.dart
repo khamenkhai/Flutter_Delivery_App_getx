@@ -83,7 +83,7 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
                             height: 65,
                             width: 65,
                             decoration: BoxDecoration(
-                                color: Colors.lightGreen,
+                                color: Theme.of(context).primaryColor,
                                 borderRadius: BorderRadius.circular(15)),
                             child: Icon(Icons.qr_code_scanner_sharp,
                                 color: Colors.white),
@@ -99,7 +99,7 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
                             height: 65,
                             width: 65,
                             decoration: BoxDecoration(
-                                color: Colors.lightGreen,
+                                color: Theme.of(context).primaryColor,
                                 borderRadius: BorderRadius.circular(15)),
                             child: Icon(Icons.qr_code, color: Colors.white),
                           ),
@@ -119,7 +119,7 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
                               height: 65,
                               width: 65,
                               decoration: BoxDecoration(
-                                  color: Colors.lightGreen,
+                                  color: Theme.of(context).primaryColor,
                                   borderRadius: BorderRadius.circular(15)),
                               child: Icon(Icons.attach_money_sharp,
                                   color: Colors.white),
@@ -140,7 +140,7 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
                               height: 65,
                               width: 65,
                               decoration: BoxDecoration(
-                                  color: Colors.lightGreen,
+                                  color: Theme.of(context).primaryColor,
                                   borderRadius: BorderRadius.circular(15)),
                               child: Icon(Icons.history, color: Colors.white),
                             ),
@@ -188,7 +188,7 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
           backgroundColor: Colors.transparent,
           child: Icon(
             CupertinoIcons.money_dollar_circle_fill,
-            color: Colors.lightGreen,
+            color: Theme.of(context).primaryColor,
           ),
         ),
         title: Wrap(

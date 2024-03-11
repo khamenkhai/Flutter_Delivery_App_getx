@@ -80,7 +80,7 @@ class _UserWhoOrdersScreenState extends State<UserWhoOrdersScreen> {
                               backgroundColor: Colors.grey.shade100,
                               child: Icon(
                                 Icons.person,
-                                color: Colors.lightGreen,
+                                color:Theme.of(context).primaryColor,
                               )),
                           title: Text("${e.customerName}"),
                           subtitle: Text("${timeago.format(e.orderTime!)}"),

@@ -95,7 +95,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         children: [
                           Icon(
                             CupertinoIcons.money_dollar,
-                            color: Colors.lightGreen,
+                            color: Theme.of(context).primaryColor,
                           ),
 
                           MyText(

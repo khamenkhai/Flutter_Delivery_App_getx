@@ -75,7 +75,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   width: 120,
                   margin: EdgeInsets.only(bottom: 35),
                   decoration: BoxDecoration(
-                    color:imageProfile==null ? Colors.white : Colors.transparent
+                    color:imageProfile==null ? Colors.white : Colors.white,
+                    shape: BoxShape.circle
                   ),
                   child:imageProfile==null ? Center(
                     child: Icon(Ionicons.person,size:60),
@@ -89,8 +90,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 0.3,color: Colors.grey
+                    ),
+                    borderRadius: BorderRadius.circular(7)
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,color: Theme.of(context).primaryColor
+                    ),
                     borderRadius: BorderRadius.circular(7)
                   ),
                   contentPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 15)
@@ -102,8 +111,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 0.3,color: Colors.grey
+                    ),
+                    borderRadius: BorderRadius.circular(7)
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,color: Theme.of(context).primaryColor
+                    ),
                     borderRadius: BorderRadius.circular(7)
                   ),
                   contentPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 15)
@@ -115,8 +132,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 0.3,color: Colors.grey
+                    ),
+                    borderRadius: BorderRadius.circular(7)
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,color: Theme.of(context).primaryColor
+                    ),
                     borderRadius: BorderRadius.circular(7)
                   ),
                   contentPadding: EdgeInsets.symmetric(vertical: 0,horizontal: 15)

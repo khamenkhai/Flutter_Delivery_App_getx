@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       emailController: emailController,
                       hintText: "Email",
                       icon: Icons.person,
-                      iconColor: Colors.lightGreen,
+                      iconColor: Theme.of(context).primaryColor,
                     ),
                     //password text field
                     SizedBox(height: 15),
@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintText: "Password",
                         filled: true,
                         fillColor: Colors.grey.shade100,
-                        prefixIcon: Icon(Icons.lock, color: Colors.lightGreen),
+                        prefixIcon: Icon(Icons.lock, color: Theme.of(context).primaryColor),
                         contentPadding: EdgeInsets.symmetric(vertical: 15),
                         suffixIcon: IconButton(
                             onPressed: () {
@@ -135,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         "SignUp",
                         style: TextStyle(
-                          color: Colors.lightGreen,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     )

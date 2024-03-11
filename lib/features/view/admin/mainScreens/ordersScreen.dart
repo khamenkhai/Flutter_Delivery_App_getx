@@ -102,6 +102,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                               .pendingOrders[index],
                                         );
                                       },
+                                      context,
                                     );
                                   },
                                 )
@@ -127,6 +128,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                   .assingedOrders[index],
                                             );
                                           },
+                                          context,
                                         );
                                       },
                                     )
@@ -153,6 +155,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                       .completedOrders[index],
                                                 );
                                               },
+                                              context,
                                             );
                                           },
                                         )
@@ -314,7 +317,9 @@ class _OrderScreenState extends State<OrderScreen> {
             border: isCurrent
                 ? Border.all(width: 0, color: Colors.transparent)
                 : Border.all(width: 0.5, color: Colors.grey),
-            color: isCurrent ? Colors.lightGreen : Colors.transparent),
+            color: isCurrent
+                ? Theme.of(context).primaryColor
+                : Colors.transparent),
         child: MyText(
             text: status,
             color: isCurrent ? Colors.white : Colors.black,
@@ -325,7 +330,8 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 }
 
-Widget _orderCardWidget(OrderModel order, Function() onTap) {
+Widget _orderCardWidget(
+    OrderModel order, Function() onTap, BuildContext context) {
   return InkWell(
     onTap: onTap,
     child: Container(
@@ -379,7 +385,7 @@ Widget _orderCardWidget(OrderModel order, Function() onTap) {
                 SizedBox(height: 7),
                 Row(
                   children: [
-                    Icon(Icons.person, color: Colors.lightGreen, size: 20),
+                    Icon(Icons.person, color: Theme.of(context).primaryColor, size: 20),
                     SizedBox(width: 6),
                     Text(
                       "${order.userName}",
@@ -390,7 +396,7 @@ Widget _orderCardWidget(OrderModel order, Function() onTap) {
                 Row(
                   children: [
                     Icon(Icons.location_on_outlined,
-                        color: Colors.lightGreen, size: 20),
+                        color: Theme.of(context).primaryColor, size: 20),
                     SizedBox(width: 6),
                     Flexible(
                       // Use Flexible to allow text to wrap if needed
@@ -405,7 +411,7 @@ Widget _orderCardWidget(OrderModel order, Function() onTap) {
                 Row(
                   children: [
                     Icon(Icons.access_time_outlined,
-                        color: Colors.lightGreen, size: 20),
+                        color: Theme.of(context).primaryColor, size: 20),
                     SizedBox(width: 6),
                     Text(
                       "${DateFormat('d MMMM ,y  hh:mm a').format(order.time!)}",

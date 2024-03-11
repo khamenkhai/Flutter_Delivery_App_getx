@@ -1,5 +1,5 @@
-import 'package:delivery_app/features/controllers/auth/auth_controller/auth_controller.dart';
-import 'package:delivery_app/features/repositories/auth_repo/auth_repo.dart';
+import 'package:delivery_app/features/controllers/auth_controller/auth_controller.dart';
+import 'package:delivery_app/features/repositories/authReposioory/authRepository.dart';
 import 'package:delivery_app/const/controllers.dart';
 import 'package:delivery_app/features/repositories/userRepositories/userRepository.dart';
 import 'package:delivery_app/features/view/admin/adminScreen.dart';

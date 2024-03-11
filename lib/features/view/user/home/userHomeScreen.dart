@@ -2,6 +2,7 @@ import 'package:delivery_app/features/view/admin/widgets/mytextwidget.dart';
 import 'package:delivery_app/const/controllers.dart';
 import 'package:delivery_app/const/utils.dart';
 import 'package:delivery_app/features/view/user/commonWidgets/cartbadgeWidget.dart';
+import 'package:delivery_app/features/view/user/commonWidgets/productCardWidget.dart';
 import 'package:delivery_app/models/categoryModel.dart';
 import 'package:delivery_app/features/view/user/home/homeSubScreeen/productsByCategoryScreen.dart';
 import 'package:delivery_app/features/view/user/home/homeSubScreeen/searchScreen.dart';
@@ -20,46 +21,136 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          ///custom app bar
-          _homeAppBar(),
+      backgroundColor: Colors.grey.shade50,
+      body: SafeArea(
+        child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
+          slivers: [
+            ///custom app bar
+            _homeAppBar(),
 
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 10),
+            SliverToBoxAdapter(
+              child: Obx(
+                () => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10),
 
-                ///show all categories with gridview
-                Obx(
-                  () => GridView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: categoryController.categories.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 15,
-                      crossAxisSpacing: 10,
-                      childAspectRatio: 0.75,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, bottom: 15),
+                      child: MyText(
+                        text: "Categories",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
                     ),
-                    itemBuilder: (context, index) {
-                      CategoryModel category =
-                          categoryController.categories[index];
-                      return _categoryGridWidget(category, context);
-                    },
-                  ),
+
+                    ///show all categories with gridview
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      physics: BouncingScrollPhysics(),
+                      child: Row(
+                        children: [
+                          ...categoryController.categories.map((element) {
+                            final index =
+                                categoryController.categories.indexOf(element);
+
+                            return GestureDetector(
+                              onTap: (){
+                                navigatorPush(context, ProductByCategory(category: element.categoryName.toString()));
+                              },
+                              child: Container(
+                                width: 125,
+                                // height: 165,
+                                constraints: BoxConstraints(),
+                                margin: index == 0
+                                    ? EdgeInsets.only(left: 15)
+                                    : EdgeInsets.symmetric(horizontal: 5),
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: getColorByCode(
+                                    element.colorCode.toString(),
+                                  ).withOpacity(0.2),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(20),
+                                      child: Image.network(
+                                        "${element.categoryImage}",
+                                        fit: BoxFit.cover,
+                                        // width: 65,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(8),
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey.shade50,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      // width: double.infinity,
+                                      child: Center(
+                                        child: Text("${element.categoryName}"),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          }).toList()
+                        ],
+                      ),
+                    ),
+
+
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, bottom: 15,top: 25),
+                      child: MyText(
+                        text: "Products",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+
+
+                    ...productController.products.map((element){
+                      return Column(
+                        children: [
+                          ProductCardWidget(product: element, onTap: (){}, backgroundColor: Colors.white),
+                          SizedBox(height: 10),
+                        ],
+                      );
+                    }).toList()
+
+                    // () => GridView.builder(
+                    //   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    //   shrinkWrap: true,
+                    //   physics: NeverScrollableScrollPhysics(),
+                    //   itemCount: categoryController.categories.length,
+                    //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    //     crossAxisCount: 3,
+                    //     mainAxisSpacing: 15,
+                    //     crossAxisSpacing: 10,
+                    //     childAspectRatio: 0.75,
+                    //   ),
+                    //   itemBuilder: (context, index) {
+                    //     CategoryModel category =
+                    //         categoryController.categories[index];
+                    //     return _categoryGridWidget(category, context);
+                    //   },
+                    // ),
+                  ],
                 ),
-                SizedBox(height: 70),
-              ],
-            ),
-          )
-        ],
+              ),
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   ///category card widget to show each category
@@ -67,7 +158,8 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       CategoryModel category, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        userProductController.getProductsbyCategory(category.categoryName.toString());
+        userProductController
+            .getProductsbyCategory(category.categoryName.toString());
         navigatorPush(
           context,
           ProductByCategory(category: category.categoryName.toString()),
@@ -76,7 +168,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       child: Container(
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey.shade50,
           borderRadius: BorderRadius.circular(6),
           boxShadow: [
             BoxShadow(
@@ -95,7 +187,8 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                color: getColorByCode(category.colorCode.toString()).withOpacity(0.3),
+                color: getColorByCode(category.colorCode.toString())
+                    .withOpacity(0.3),
               ),
               child: Image.network(
                 "${category.categoryImage}",
@@ -132,9 +225,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       pinned: true,
       title: Text("Home"),
       expandedHeight: 200,
-      actions: [
-        CartBadgeWidget(context: context)
-      ],
+      actions: [CartBadgeWidget(context: context)],
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           color: Colors.grey.shade50,
@@ -165,9 +256,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       ),
     );
   }
-
 }
-
 
 class FakeSearchBar extends StatelessWidget {
   const FakeSearchBar({

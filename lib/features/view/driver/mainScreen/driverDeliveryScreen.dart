@@ -130,7 +130,7 @@ class _DriverDeliveryScreenState extends State<DriverDeliveryScreen> {
             border: isCurrent
                 ? Border.all(width: 0, color: Colors.transparent)
                 : Border.all(width: 0.5, color: Colors.grey),
-            color: isCurrent ? Colors.lightGreen : Colors.transparent),
+            color: isCurrent ? Theme.of(context).primaryColor : Colors.transparent),
         child: MyText(
             text: status,
             color: isCurrent ? Colors.white : Colors.black,

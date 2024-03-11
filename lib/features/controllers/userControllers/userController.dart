@@ -54,7 +54,10 @@ class UserController extends GetxController {
       senderPhone: currentUser.phoneNumber,
       transactionTime: DateTime.now(),
     );
+    print("One");
     bool status = await userRepository.transferMoney(transaction: transaction);
+    print("One 2");
+
     return status;
   }
 

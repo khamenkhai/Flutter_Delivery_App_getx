@@ -24,7 +24,6 @@ class ProductByCategory extends StatefulWidget {
 class _ProductByCategoryState extends State<ProductByCategory> {
   bool viewByList = false;
 
-
   ///redirect to product detail page
   navigateToProductDetail(ProductModel product) {
     userProductController.getProductById(product.productId!);
@@ -92,7 +91,7 @@ class _ProductByCategoryState extends State<ProductByCategory> {
                         crossAxisCount: 2,
                         mainAxisSpacing: 15,
                         crossAxisSpacing: 20,
-                        childAspectRatio: 0.75),
+                        childAspectRatio: 0.78),
                     itemBuilder: (context, index) {
                       ProductModel product =
                           userProductController.productsByCategory[index];
@@ -103,7 +102,6 @@ class _ProductByCategoryState extends State<ProductByCategory> {
     );
   }
 
-
   ///widget to show each projects with grid widet
   GestureDetector _ProductGridWidget(ProductModel product) {
     return GestureDetector(
@@ -113,7 +111,10 @@ class _ProductByCategoryState extends State<ProductByCategory> {
       child: Container(
         //padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          //border: Border.all(width: 0.5,color: Colors.grey)
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -189,17 +190,20 @@ class _ProductByCategoryState extends State<ProductByCategory> {
                         text: "\$${product.currentPrice}",
                         fontSize: 17,
                       ),
-                      IconButton(
-                        onPressed: () {
-                          ///add product to cart
-                          cartController.addToCart(
-                            CartModel(id: product.productId!, quantity: 1),
-                            1,
-                          );
-                        },
-                        icon: Icon(
-                          Icons.shopping_bag,
-                          color: Colors.black,
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10, top: 5),
+                        child: InkWell(
+                          onTap: () {
+                            ///add product to cart
+                            cartController.addToCart(
+                              CartModel(id: product.productId!, quantity: 1),
+                              1,
+                            );
+                          },
+                          child: Icon(
+                            Icons.shopping_bag,
+                            color: Colors.black,
+                          ),
                         ),
                       )
                     ],

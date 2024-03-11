@@ -19,6 +19,36 @@ class AppTheme {
     fontFamily: "inter",
   );
 
+
+  static ThemeData orangeTheme = ThemeData(
+    useMaterial3: false,
+    primaryColor: Colors.orange,
+    primarySwatch: Colors.orange,
+    scaffoldBackgroundColor: Colors.grey.shade50,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.white,
+      elevation: 0.07,
+      foregroundColor: Colors.black,
+    ),
+    buttonTheme: ButtonThemeData(buttonColor: Colors.orange),
+    fontFamily: "inter",
+  );
+
+
+  static ThemeData redTheme = ThemeData(
+    useMaterial3: false,
+    primaryColor: Colors.red,
+    primarySwatch: Colors.red,
+    scaffoldBackgroundColor: Colors.grey.shade50,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.white,
+      elevation: 0.07,
+      foregroundColor: Colors.black,
+    ),
+    buttonTheme: ButtonThemeData(buttonColor: Colors.red),
+    fontFamily: "inter",
+  );
+
   // static ThemeData blueTheme = ThemeData(
   //   useMaterial3: false,
   //   primaryColor: Colors.lightBlue,

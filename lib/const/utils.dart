@@ -7,21 +7,18 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_transition/page_transition.dart';
 
-
 Future<Uint8List?> myImagePicker() async {
-    try {
-      final imagePicker = ImagePicker();
-      final file = await imagePicker.pickImage(
-          source: ImageSource.gallery);
-      if (file != null) {
-        return await file.readAsBytes();
-      }
-    } catch (e) {
-      debugPrint('Failed to pick image: $e');
+  try {
+    final imagePicker = ImagePicker();
+    final file = await imagePicker.pickImage(source: ImageSource.gallery);
+    if (file != null) {
+      return await file.readAsBytes();
     }
-    return null;
+  } catch (e) {
+    debugPrint('Failed to pick image: $e');
   }
-
+  return null;
+}
 
 navigatorPush(BuildContext context, Widget route,
     [PageTransitionType type = PageTransitionType.fade]) {
@@ -35,19 +32,19 @@ navigatorPushReplacement(BuildContext context, Widget route,
 
 showMessageSnackBar(
     {required String message, required BuildContext context, bool? isSuccess}) {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(content: Text(message))
-      // );
+  // ScaffoldMessenger.of(context).showSnackBar(
+  //   SnackBar(content: Text(message))
+  // );
   var snackBar = SnackBar(
     elevation: 0,
     behavior: SnackBarBehavior.floating,
-    margin: EdgeInsets.only(bottom: 35,left: 15,right: 15),
+    margin: EdgeInsets.only(bottom: 35, left: 15, right: 15),
     //backgroundColor: Colors.grey.shade900,
     backgroundColor: Colors.transparent,
     content: FlutterSnackbarContent(
       color: Colors.grey.shade900,
       //color: Colors.transparent,
-      message: '${message}',  
+      message: '${message}',
       contentType: ContentType.success,
     ),
   );
@@ -56,8 +53,6 @@ showMessageSnackBar(
     ..hideCurrentSnackBar()
     ..showSnackBar(snackBar);
 }
-
-
 
 //loading widget
 Widget loadingWidget({Color color = Colors.black, double size = 35}) {
@@ -78,23 +73,20 @@ Widget errorWidget(String errorMessage) {
   );
 }
 
-
-
-
 Future<Uint8List?> pickImage(bool isCamera) async {
   final picker = ImagePicker();
-  XFile? pickedFile = await picker.pickImage(source:isCamera? ImageSource.camera: ImageSource.gallery);
+  XFile? pickedFile = await picker.pickImage(
+      source: isCamera ? ImageSource.camera : ImageSource.gallery);
 
   if (pickedFile != null) {
     List<int> imageBytes = await pickedFile.readAsBytes();
-    
+
     Uint8List uint8List = Uint8List.fromList(imageBytes);
     return uint8List;
   }
 
   return null;
 }
-
 
 String generateRandomId() {
   const characters = '0123456789';
@@ -108,7 +100,6 @@ String generateRandomId() {
 
   return "#${idBuffer}";
 }
-
 
 //get color code
 Color getColorByCode(String colorString) {
@@ -156,29 +147,33 @@ Color getColorByCode(String colorString) {
   }
 }
 
+Map<String, Color> colorMap = {
+  'amber': Colors.amber,
+  'blue': Colors.blue,
+  'red': Colors.red,
+  'green': Colors.green,
+  'orange': Colors.orange,
+  'purple': Colors.purple,
+  'teal': Colors.teal,
+  'yellow': Colors.yellow,
+  'indigo': Colors.indigo,
+  'pink': Colors.pink,
+  'cyan': Colors.cyan,
+  'brown': Colors.brown,
+  'grey': Colors.grey,
+  'deepOrange': Colors.deepOrange,
+  'lightGreen': Colors.lightGreen,
+  'deepPurple': Colors.deepPurple,
+  'tealAccent': Colors.tealAccent,
+  'lime': Colors.lime,
+  'blueGrey': Colors.blueGrey,
+};
 
-  Map<String, Color> colorMap = {
-    'amber': Colors.amber,
-    'blue': Colors.blue,
-    'red': Colors.red,
-    'green': Colors.green,
-    'orange': Colors.orange,
-    'purple': Colors.purple,
-    'teal': Colors.teal,
-    'yellow': Colors.yellow,
-    'indigo': Colors.indigo,
-    'pink': Colors.pink,
-    'cyan': Colors.cyan,
-    'brown': Colors.brown,
-    'grey': Colors.grey,
-    'deepOrange': Colors.deepOrange,
-    'lightGreen': Colors.lightGreen,
-    'deepPurple': Colors.deepPurple,
-    'tealAccent': Colors.tealAccent,
-    'lime': Colors.lime,
-    'blueGrey': Colors.blueGrey,
-  };
-
+roundedElevatedStyle() {
+  return ElevatedButton.styleFrom(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+  );
+}
 // Color getColorDataByCode(int code) {
 //   if (code >= 0 && code < colorList.length) {
 //     return colorList[code];

@@ -26,7 +26,7 @@ class _SearchScreenState extends State<SearchScreen> {
           slivers: [
             ///search bar
             SliverAppBar(
-              pinned: false,
+              pinned: true,
               floating: true,
               expandedHeight: 130,
               title: Text("Search"),
@@ -86,6 +86,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           )
                         : Column(
                             children: [
+                              SizedBox(height: 10),
                               ...userProductController.getSearchProducts
                                   .map(
                                     (e) => Column(

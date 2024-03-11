@@ -52,24 +52,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
     ));
     return value;
   }
-  // Future<bool> orderNow(
-  //     {required double totalAmount,
-  //     required List<CartModel> products,
-  //     required bool paid}) async {
-  //   bool value = await userOrderController.makeAnOrder(
-  //     paid: paid,
-  //     products: products,
-  //     orderId: orderId,
-  //     totalAmount: totalAmount,
-  //     address:
-  //         "${streetNumberController.text} ${streetNameController.text}, ${cityController.text}",
-  //     userName: nameController.text,
-  //     userPhoneNumber: int.parse(phoneController.text),
-  //     context: context,
-  //     userId: CurrentUser.uid.toString(),
-  //   );
-  //   return value;
-  // }
+
 
   @override
   void initState() {
@@ -152,6 +135,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
                           proceedOrder(false);
                         } else {
                           ///pay now
+                          _amountController.text = cartController.totalAmount.toString();
                           UserModel admin =
                               await UserRepository().getAdminData();
                           showModalBottomSheet(
@@ -183,6 +167,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
                                       ),
                                       SizedBox(height: 15),
                                       TextField(
+                                        //readOnly: true,
                                         keyboardType: TextInputType.phone,
                                         controller: _amountController,
                                         decoration: InputDecoration(
@@ -208,6 +193,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
                                       PrimaryButton(
                                         text: "Transfer",
                                         onTap: () async {
+                                          print("Hello world");
                                           bool status = await userController
                                               .transferMoney(
                                             note: _noteController.text,
@@ -220,6 +206,9 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
                                           );
                                           if (status) {
                                             proceedOrder(true);
+                                            print("staus true");
+                                          }else{
+                                            print("status false");
                                           }
                                         },
                                         ml: 0,

@@ -41,6 +41,7 @@ class DeliveryController extends GetxController {
       customerName: newDelivery.customerName,
       customerPhone: newDelivery.customerPhone,
       orderTime: DateTime.now(),
+      customerPaid: newDelivery.customerPaid
     );
     
     bool result = await deliveryRepository.assignDelivery(delivery);

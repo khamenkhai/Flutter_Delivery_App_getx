@@ -173,7 +173,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
             border: isCurrent
                 ? Border.all(width: 0, color: Colors.transparent)
                 : Border.all(width: 0.5, color: Colors.grey),
-            color: isCurrent ? Colors.lightGreen : Colors.transparent),
+            color: isCurrent ? Theme.of(context).primaryColor: Colors.transparent),
         child: MyText(
             text: status,
             color: isCurrent ? Colors.white : Colors.black,
@@ -239,7 +239,7 @@ Widget _deliveryCardWidget(DeliveryModel delivery, BuildContext context) {
                 SizedBox(height: 7),
                 Row(
                   children: [
-                    Icon(Icons.person, color: Colors.lightGreen, size: 20),
+                    Icon(Icons.person, color: Theme.of(context).primaryColor, size: 20),
                     SizedBox(width: 6),
                     Text(
                       "${delivery.customerName}",
@@ -248,7 +248,7 @@ Widget _deliveryCardWidget(DeliveryModel delivery, BuildContext context) {
                     Icon(
                       Icons.delivery_dining,
                       size: 20,
-                      color: Colors.lightGreen,
+                      color: Theme.of(context).primaryColor,
                     ),
                     SizedBox(width: 6),
                     Text(
@@ -260,7 +260,7 @@ Widget _deliveryCardWidget(DeliveryModel delivery, BuildContext context) {
                 Row(
                   children: [
                     Icon(Icons.location_on_outlined,
-                        color: Colors.lightGreen, size: 20),
+                        color: Theme.of(context).primaryColor, size: 20),
                     SizedBox(width: 6),
                     Flexible(
                       // Use Flexible to allow text to wrap if needed
@@ -275,7 +275,7 @@ Widget _deliveryCardWidget(DeliveryModel delivery, BuildContext context) {
                 Row(
                   children: [
                     Icon(Icons.access_time_outlined,
-                        color: Colors.lightGreen, size: 20),
+                        color: Theme.of(context).primaryColor, size: 20),
                     SizedBox(width: 6),
                     Text(
                       "${DateFormat('d MMMM ,y  hh:mm a').format(delivery.orderTime!)}",
