@@ -210,4 +210,5 @@ class _UserWalletScreenState extends State<UserWalletScreen> {
       ),
     );
   }
+
 }

@@ -25,14 +25,14 @@ class _AdminOrderHistoryScreenState extends State<AdminOrderHistoryScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
-        elevation: 0.2,
-        title: Text("History"),
+        elevation: 0,
+        title: Text("Order History"),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: Obx(
           () {
-            return ListView.separated(
+            return orderController.orderHistory.length> 0 ? ListView.separated(
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 10),
               itemCount: orderController.orderHistory.length,
@@ -45,7 +45,7 @@ class _AdminOrderHistoryScreenState extends State<AdminOrderHistoryScreen> {
                   context,
                 );
               },
-            );
+            ) : Center(child: Text("No History"),);
           },
         ),
       ),

@@ -144,6 +144,20 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                     Expanded(child: MyText(text: "${widget.delivery.status}")),
                   ],
                 ),
+                //paid
+                SizedBox(height: 15),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: size.width / 2 - 55,
+                      child:
+                          MyText(text: "Paid", fontWeight: FontWeight.bold),
+                    ),
+                    MyText(text: ": "),
+                    Expanded(child: MyText(text: "${widget.delivery.customerPaid}")),
+                  ],
+                ),
                 //order date
                 SizedBox(height: 15),
                 Row(

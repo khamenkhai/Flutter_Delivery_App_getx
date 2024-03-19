@@ -3,6 +3,7 @@ import 'package:delivery_app/const/controllers.dart';
 import 'package:delivery_app/const/utils.dart';
 import 'package:delivery_app/features/view/user/commonWidgets/cartbadgeWidget.dart';
 import 'package:delivery_app/features/view/user/commonWidgets/productCardWidget.dart';
+import 'package:delivery_app/features/view/user/home/homeSubScreeen/productDetailScreen.dart';
 import 'package:delivery_app/models/categoryModel.dart';
 import 'package:delivery_app/features/view/user/home/homeSubScreeen/productsByCategoryScreen.dart';
 import 'package:delivery_app/features/view/user/home/homeSubScreeen/searchScreen.dart';
@@ -120,7 +121,9 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                     ...productController.products.map((element){
                       return Column(
                         children: [
-                          ProductCardWidget(product: element, onTap: (){}, backgroundColor: Colors.white),
+                          ProductCardWidget(product: element, onTap: (){
+                            navigatorPush(context, ProductDetailScreen(productId: element.productId.toString()));
+                          }, backgroundColor: Colors.white),
                           SizedBox(height: 10),
                         ],
                       );

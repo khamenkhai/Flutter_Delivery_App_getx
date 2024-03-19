@@ -249,6 +249,18 @@ class _OrderScreenState extends State<OrderScreen> {
                       ],
                     ),
 
+                    SizedBox(height: 10),
+                    //customer address
+                    Row(
+                      children: [
+                        Container(
+                          width: 170,
+                          child: MyText(text: "Already paid : "),
+                        ),
+                        Expanded(child: MyText(text: "${order.paid}")),
+                      ],
+                    ),
+
                     //ordered products
                     SizedBox(height: 10),
                     MyText(text: "Ordered Products : "),
@@ -385,7 +397,8 @@ Widget _orderCardWidget(
                 SizedBox(height: 7),
                 Row(
                   children: [
-                    Icon(Icons.person, color: Theme.of(context).primaryColor, size: 20),
+                    Icon(Icons.person,
+                        color: Theme.of(context).primaryColor, size: 20),
                     SizedBox(width: 6),
                     Text(
                       "${order.userName}",

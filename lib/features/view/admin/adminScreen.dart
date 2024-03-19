@@ -3,11 +3,13 @@ import 'package:delivery_app/features/controllers/adminControllers/deliveryContr
 import 'package:delivery_app/features/controllers/adminControllers/driverController.dart';
 import 'package:delivery_app/features/controllers/adminControllers/orderController.dart';
 import 'package:delivery_app/features/controllers/adminControllers/productController.dart';
+import 'package:delivery_app/features/controllers/userControllers/userController.dart';
 import 'package:delivery_app/features/repositories/adminRepositories/categoryRepo.dart';
 import 'package:delivery_app/features/repositories/adminRepositories/deliveryRepository.dart';
 import 'package:delivery_app/features/repositories/adminRepositories/driverRepo.dart';
 import 'package:delivery_app/features/repositories/adminRepositories/orderRepository.dart';
 import 'package:delivery_app/features/repositories/adminRepositories/productRepositoryes.dart';
+import 'package:delivery_app/features/repositories/userRepositories/userRepository.dart';
 import 'package:delivery_app/features/view/admin/mainScreens/adminDashboard.dart';
 import 'package:delivery_app/features/view/admin/mainScreens/orderHistoryScreen.dart';
 import 'package:delivery_app/features/view/admin/mainScreens/ordersScreen.dart';
@@ -45,6 +47,7 @@ class _AdminScreenState extends State<AdminScreen> {
     Get.put(OrderController(orderRepository: orderRepository));
     Get.put(DeliveryController(deliveryRepository: deliveryRepository));
     Get.put(DriverController(driverReposiotry: driverReposiotry));
+    Get.put(UserController(userRepository: UserRepository()));
     super.initState();
   }
 

@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+import 'package:delivery_app/const/utils.dart';
 import 'package:delivery_app/features/view/admin/widgets/mytextwidget.dart';
 import 'package:delivery_app/const/controllers.dart';
 import 'package:delivery_app/models/cartModel.dart';
@@ -28,9 +29,13 @@ class ProductCardWidget extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              height: 80,
-              width: 80,
-              padding: EdgeInsets.all(15),
+              height: 67,
+              width: 67,
+              padding: EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                color: getColorByCode(product.color.toString()).withOpacity(0.2),
+                shape: BoxShape.circle
+              ),
               child: Hero(
                 tag: product.productId!,
                 child: Image.network(

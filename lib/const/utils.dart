@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_snackbar_content/flutter_snackbar_content.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -28,6 +29,15 @@ navigatorPush(BuildContext context, Widget route,
 navigatorPushReplacement(BuildContext context, Widget route,
     [PageTransitionType type = PageTransitionType.fade]) {
   Navigator.pushReplacement(context, PageTransition(child: route, type: type));
+}
+
+showGetSnackbar(String title,String message){
+  Get.snackbar(
+  "${title}", 
+  "${message}", 
+  duration: Duration(seconds: 3), 
+);
+
 }
 
 showMessageSnackBar(

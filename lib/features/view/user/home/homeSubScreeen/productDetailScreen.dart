@@ -7,6 +7,7 @@ import 'package:delivery_app/features/view/user/commonWidgets/primaryButton.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key, required this.productId});
@@ -184,7 +185,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     Navigator.pop(context);
                   },
                 ),
-              )
+              ),
+
+
+              ///fav button
+              Positioned(
+                top: 0,
+                right: 10,
+                child: Obx(
+                    () => IconButton(
+                      onPressed: () {
+                        userProductController.addProductToFav(
+                            productId: product.productId.toString());
+                      },
+                      icon: authController.user!.favProducts!
+                              .contains(product.productId.toString())
+                          ? Icon(
+                              IconlyBold.heart,
+                              color: Colors.red,
+                            )
+                          : Icon(
+                              IconlyLight.heart,
+                            ),
+                    ),
+                  ),
+              ),
             ],
           );
         } else {

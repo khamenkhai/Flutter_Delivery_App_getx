@@ -38,6 +38,11 @@ class UserController extends GetxController {
   } 
 
 
+  Future<bool> checkIfThereisEnoughMoney(num amount){
+    return userRepository.checkIfThereisEnoughMoney(amount);
+  } 
+
+
 
   //transfer money
   Future<bool> transferMoney({required num amount,String? note,String? orderId,required UserModel receiver,required UserModel currentUser})async{

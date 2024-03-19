@@ -30,7 +30,7 @@ class _DriverDeliveryScreenState extends State<DriverDeliveryScreen> {
           title: Text("Deliveries"),
           centerTitle: false,
           backgroundColor: Colors.white,
-          elevation: 0.2,
+          elevation: 0,
           bottom: PreferredSize(preferredSize: Size.fromHeight(50), child: Container(
                       color: Colors.white,
                       padding: EdgeInsets.only(bottom: 15),

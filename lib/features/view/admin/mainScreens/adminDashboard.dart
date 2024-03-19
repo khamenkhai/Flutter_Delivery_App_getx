@@ -36,7 +36,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0.2,
+        elevation: 0,
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -174,7 +174,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Container(
-          padding: EdgeInsets.only(top: 20, bottom: 20, left: 13, right: 13),
+          padding: EdgeInsets.only(top: 35, bottom: 35, left: 13, right: 13),
           child: Column(
             children: [
               Row(

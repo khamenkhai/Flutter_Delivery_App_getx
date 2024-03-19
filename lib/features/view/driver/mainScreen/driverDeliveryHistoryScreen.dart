@@ -23,14 +23,14 @@ class _DriverHistoryScreenState extends State<DriverHistoryScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
-        elevation: 0.2,
-        title: Text("History"),
+        elevation: 0,
+        title: Text("Delivery History"),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: Obx(
           () {
-            return ListView.separated(
+            return driverDeliveryController.historyList.length> 0 ? ListView.separated(
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 10),
               itemCount: driverDeliveryController.historyList.length,
@@ -43,7 +43,7 @@ class _DriverHistoryScreenState extends State<DriverHistoryScreen> {
                   context,
                 );
               },
-            );
+            ) : Center(child: Text("No History"),);
           },
         ),
       ),

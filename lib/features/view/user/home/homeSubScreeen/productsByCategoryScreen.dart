@@ -35,6 +35,12 @@ class _ProductByCategoryState extends State<ProductByCategory> {
   }
 
   @override
+  void initState() {
+    userProductController.getProductsbyCategory(widget.category);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -83,19 +89,20 @@ class _ProductByCategoryState extends State<ProductByCategory> {
                     },
                   )
                 : GridView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: userProductController.productsByCategory.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 15,
-                        crossAxisSpacing: 20,
-                        childAspectRatio: 0.78),
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 15,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: 0.69,
+                    ),
                     itemBuilder: (context, index) {
                       ProductModel product =
                           userProductController.productsByCategory[index];
-                      return _ProductGridWidget(product);
+                      return _ProductGridWidget2(product);
                     },
                   ),
       ),
@@ -192,6 +199,123 @@ class _ProductByCategoryState extends State<ProductByCategory> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 10, top: 5),
+                        child: InkWell(
+                          onTap: () {
+                            ///add product to cart
+                            cartController.addToCart(
+                              CartModel(id: product.productId!, quantity: 1),
+                              1,
+                            );
+                          },
+                          child: Icon(
+                            Icons.shopping_bag,
+                            color: Colors.black,
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  ///widget to show each projects with grid widet
+  GestureDetector _ProductGridWidget2(ProductModel product) {
+    return GestureDetector(
+      onTap: () {
+        navigateToProductDetail(product);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                product.discount! > 0
+                    ? Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 13,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
+                          ),
+                        ),
+                        child: MyText(
+                          text: "${product.discount}%",
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                      )
+                    : Container(),
+                Container(
+                  padding: EdgeInsets.all(5),
+                  child: Obx(
+                    () => InkWell(
+                      onTap: () {
+                        userProductController.addProductToFav(
+                            productId: product.productId.toString());
+                      },
+                      child: authController.user!.favProducts!
+                              .contains(product.productId.toString())
+                          ? Icon(
+                              IconlyBold.heart,
+                              color: Colors.red,
+                              size: 18,
+                            )
+                          : Icon(
+                              IconlyLight.heart,
+                              size: 18,
+                            ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 3),
+            Center(
+              child: Hero(
+                tag: product.productId!,
+                child: Image.network(product.productImage!, height: 54),
+              ),
+            ),
+
+            ///product detail
+            Container(
+              padding: EdgeInsets.only(left: 15, top: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyText(text: "${product.name}"),
+                  MyText(
+                    text: "${product.category}",
+                    color: Colors.grey.shade700,
+                    fontSize: 14,
+                  ),
+                  SizedBox(height: 3),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      MyText(
+                        text: "\$${product.currentPrice}",
+                        fontSize: 15,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10, top: 0),
                         child: InkWell(
                           onTap: () {
                             ///add product to cart

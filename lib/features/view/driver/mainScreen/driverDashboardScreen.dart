@@ -31,7 +31,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
       backgroundColor: Colors.grey.shade50,
       drawer: Drawer(),
       appBar: AppBar(
-        elevation: 0.2,
+        elevation: 0,
         title: Text("Dashboard"),
         backgroundColor: Colors.white,
         actions: [

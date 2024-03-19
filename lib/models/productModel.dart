@@ -10,6 +10,7 @@ class ProductModel {
   final int? quantity;
   final String? color;
 
+
   ProductModel({
     this.productId,
     this.name,
@@ -50,6 +51,15 @@ class ProductModel {
       'quantity': quantity,
       'color': color
     };
+  }
+
+
+   double getCurrentPrice() {
+    if (rawPrice != null && discount != null) {
+      return rawPrice! - (rawPrice! * (discount! / 100));
+    } else {
+      return currentPrice ?? 0.0;
+    }
   }
 
 

@@ -167,7 +167,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
                                       ),
                                       SizedBox(height: 15),
                                       TextField(
-                                        //readOnly: true,
+                                        readOnly: true,
                                         keyboardType: TextInputType.phone,
                                         controller: _amountController,
                                         decoration: InputDecoration(
@@ -194,7 +194,10 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
                                         text: "Transfer",
                                         onTap: () async {
                                           print("Hello world");
-                                          bool status = await userController
+                                          
+                                          bool enoughMoney = await userController.checkIfThereisEnoughMoney(num.parse(_amountController.text));
+                                          if(enoughMoney){
+                                             bool status = await userController
                                               .transferMoney(
                                             note: _noteController.text,
                                             amount: num.parse(
@@ -210,6 +213,11 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
                                           }else{
                                             print("status false");
                                           }
+                                          }else{
+                                              Navigator.pop(context);
+                                             showMessageSnackBar(message: "Money is not enough",context: context);
+                                          }
+                                         
                                         },
                                         ml: 0,
                                         mr: 0,

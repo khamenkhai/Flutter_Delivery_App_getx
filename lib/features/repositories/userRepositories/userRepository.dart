@@ -66,16 +66,27 @@ class UserRepository {
     return userModel;
   }
 
+  Future<bool> checkIfThereisEnoughMoney(num amount)async{
+
+      final currentUser = await _userCollection.doc(CurrentUser.uid).get();
+      num currentUserBalance = currentUser["accountBalance"];
+
+      if(currentUserBalance > amount){
+        return true;
+      }else{
+        return false;
+      }
+
+  }
+
   Future<bool> transferMoney({
     required MoneyTransactionModel transaction,
   }) async {
-
     String transactionId = generateRandomId();
 
     print("two");
 
     try {
-      
       final currentUser = await _userCollection.doc(CurrentUser.uid).get();
 
       print("three");
@@ -83,60 +94,64 @@ class UserRepository {
       num currentUserBalance = currentUser["accountBalance"];
 
       print("four");
-      
-      //send to reciever
-      await _userCollection
-          .doc(CurrentUser.uid)
-          .collection(FirebaseConstant.transactionCollection)
-          .doc(transactionId)
-          .set(
-            transaction
-                .copyWith(
-                  amount: transaction.amount!,
-                  transactionType: TransactionType.send,
-                )
-                .toMap(),
-          );
 
-          print("five");
-
-      await _userCollection.doc(CurrentUser.uid).update({
-        "accountBalance": currentUserBalance - transaction.amount!,
-      });
-
-      print("six");
-
-      //received receive from sender
-      final receiverUser =
-          await _userCollection.doc(transaction.receiverId).get();
-
-      print("seven");
-
-      int receiverUserBalance = receiverUser["accountBalance"];
-
-      print("eight");
-
-      await _userCollection
-          .doc(transaction.receiverId)
-          .collection(FirebaseConstant.transactionCollection)
-          .doc(transactionId)
-          .set(
-            transaction
-                .copyWith(
+      if (currentUserBalance >= transaction.amount!) {
+        //send to reciever
+        await _userCollection
+            .doc(CurrentUser.uid)
+            .collection(FirebaseConstant.transactionCollection)
+            .doc(transactionId)
+            .set(
+              transaction
+                  .copyWith(
                     amount: transaction.amount!,
-                    transactionType: TransactionType.receive)
-                .toMap(),
-          );
+                    transactionType: TransactionType.send,
+                  )
+                  .toMap(),
+            );
+
+        print("five");
+
+        await _userCollection.doc(CurrentUser.uid).update({
+          "accountBalance": currentUserBalance - transaction.amount!,
+        });
+
+        print("six");
+
+        //received receive from sender
+        final receiverUser =
+            await _userCollection.doc(transaction.receiverId).get();
+
+        print("seven");
+
+        num receiverUserBalance = receiverUser["accountBalance"];
+
+        print("eight");
+
+        await _userCollection
+            .doc(transaction.receiverId)
+            .collection(FirebaseConstant.transactionCollection)
+            .doc(transactionId)
+            .set(
+              transaction
+                  .copyWith(
+                      amount: transaction.amount!,
+                      transactionType: TransactionType.receive)
+                  .toMap(),
+            );
 
         print("nine");
 
-      await _userCollection.doc(transaction.receiverId).update({
-        "accountBalance": receiverUserBalance + transaction.amount!,
-      });
+        await _userCollection.doc(transaction.receiverId).update({
+          "accountBalance": receiverUserBalance + transaction.amount!,
+        });
 
-      print("ten");
+        print("ten");
 
-      return true;
+        return true;
+      }else{
+        return false;
+      }
     } catch (e) {
       print("e - transferMoney : ${e}");
       return false;
@@ -189,13 +204,15 @@ class UserRepository {
     });
   }
 
-
   //get admin data
-  Future<UserModel> getAdminData()async{
-    QuerySnapshot<Map<String, dynamic>> data = await firestore.collection(FirebaseConstant.userCollection).where("role",isEqualTo: "admin").get();
-    UserModel admin = UserModel.fromJson(data.docs.first.data() as Map<String,dynamic>);
+  Future<UserModel> getAdminData() async {
+    QuerySnapshot<Map<String, dynamic>> data = await firestore
+        .collection(FirebaseConstant.userCollection)
+        .where("role", isEqualTo: "admin")
+        .get();
+    UserModel admin =
+        UserModel.fromJson(data.docs.first.data() as Map<String, dynamic>);
     print("getadmindata : ${admin.name}");
     return admin;
   }
-
 }
